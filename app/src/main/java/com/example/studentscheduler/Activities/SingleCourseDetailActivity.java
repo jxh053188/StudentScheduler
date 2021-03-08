@@ -56,6 +56,12 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         setCourseInstructorList();
         setCourseNoteList();
 
+        courseAssessmentsList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent assessmentIntent = new Intent(getApplicationContext(), SingleAssessmentDetailActivity.class);
+            assessmentIntent.putExtra("assessmentId", courseAssessment.get(position).getAssessment_Id());
+            startActivity(assessmentIntent);
+        });
+
         courseInstructorsList.setOnItemClickListener((parent, view, position, id) -> {
             Intent instructorIntent = new Intent(getApplicationContext(), SingleInstructorDetailActivity.class);
             instructorIntent.putExtra("instructorId", courseInstructor.get(position).getInstructor_id());
