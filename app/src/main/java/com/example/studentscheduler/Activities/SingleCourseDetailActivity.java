@@ -67,6 +67,12 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             instructorIntent.putExtra("instructorId", courseInstructor.get(position).getInstructor_id());
             startActivity(instructorIntent);
         });
+
+        courseNotesList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent noteIntent = new Intent(getApplicationContext(), SingleNoteDetailActivity.class);
+            noteIntent.putExtra("noteId", courseNotes.get(position).getNote_id());
+            startActivity(noteIntent);
+        });
     }
 
     private void setCourseInfo(){

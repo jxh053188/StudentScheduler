@@ -9,8 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
-        <activity android:name=".Activities.SingleAssessmentDetailActivity"></activity>
-        <activity android:name=".Activities.SingleInstructorDetailActivity" />
+        <activity android:name=".Activities.SingleNoteDetailActivity"
+            android:label="Note Details"/>
+        <activity android:name=".Activities.SingleAssessmentDetailActivity"
+            android:label="Assessment Details"/>
+        <activity android:name=".Activities.SingleInstructorDetailActivity"
+            android:label="Instructor Details"
+            android:parentActivityName=".Activities.AllInstructorsActivity"/>
         <activity
             android:name=".Activities.SingleCourseDetailActivity"
             android:label="Course Details"

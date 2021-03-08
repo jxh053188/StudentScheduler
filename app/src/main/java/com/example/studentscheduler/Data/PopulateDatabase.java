@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Instructor;
+import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.Entities.Term;
 
 import java.util.Calendar;
@@ -31,6 +32,10 @@ public class PopulateDatabase extends AppCompatActivity {
     Instructor tempInstructor2 = new Instructor();
     Instructor tempInstructor3 = new Instructor();
 
+    Note tempNote1 = new Note();
+    Note tempNote2 = new Note();
+    Note tempNote3 = new Note();
+
     AppDatabase db;
 
     public void populate(Context context){
@@ -40,6 +45,7 @@ public class PopulateDatabase extends AppCompatActivity {
             insertCourses();
             insertAssessments();
             insertInstructors();
+            insertNotes();
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(LOG_TAG, "Populate DB Failed");
@@ -91,7 +97,6 @@ public class PopulateDatabase extends AppCompatActivity {
         tempCourse1.setCourse_name("History of the Jedi Order");
         tempCourse1.setCourse_start(start.getTime());
         tempCourse1.setCourse_end(end.getTime());
-        tempCourse1.setCourse_notes("PrePopulate Notes - data data data. Notes notes notes");
         tempCourse1.setCourse_status("In Progress");
         tempCourse1.setTerm_id_fk(termList.get(0).getTerm_id());
 
@@ -102,7 +107,6 @@ public class PopulateDatabase extends AppCompatActivity {
         tempCourse2.setCourse_name("Force Push 1");
         tempCourse2.setCourse_start(start.getTime());
         tempCourse2.setCourse_end(end.getTime());
-        tempCourse2.setCourse_notes("PrePopulate Notes - data data data. Notes notes notes");
         tempCourse2.setCourse_status("Completed");
         tempCourse2.setTerm_id_fk(termList.get(0).getTerm_id());
 
@@ -113,7 +117,6 @@ public class PopulateDatabase extends AppCompatActivity {
         tempCourse3.setCourse_name("Basic Lightsaber Maintenance");
         tempCourse3.setCourse_start(start.getTime());
         tempCourse3.setCourse_end(end.getTime());
-        tempCourse3.setCourse_notes("PrePopulate Notes - data data data. Notes notes notes");
         tempCourse3.setCourse_status("Dropped");
         tempCourse3.setTerm_id_fk(termList.get(0).getTerm_id());
 
@@ -152,5 +155,16 @@ public class PopulateDatabase extends AppCompatActivity {
         tempAssessment1.setAssessment_status("Pending");
 
         db.assessmentDao().insertAllAssessments(tempAssessment1);
+    }
+
+    private void insertNotes() {
+        List<Term> TermList = db.termDao().getTermList();
+        List<Course> CourseList = db.courseDao().getCourseList(TermList.get(0).getTerm_id());
+
+        tempNote1.setNote_title("I am a note");
+        tempNote1.setNote_text("This is a very fun note about my course");
+        tempNote1.setCourse_id_fk(CourseList.get(0).getCourse_id());
+
+        db.noteDao().insertNote(tempNote1);
     }
 }

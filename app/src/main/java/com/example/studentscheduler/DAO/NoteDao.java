@@ -16,8 +16,8 @@ public interface NoteDao {
     @Query("SELECT * FROM note_table WHERE course_id_fk = :courseID ORDER BY note_id")
     List<Note> getNoteList(int courseID);
 
-    @Query("SELECT * FROM note_table WHERE course_id_fk = :courseID AND note_id = :noteID")
-    Note getNotes(int courseID, int noteID);
+    @Query("SELECT * FROM note_table WHERE note_id = :noteID")
+    Note getSingleNote(int noteID);
 
     @Insert
     void insertNote(Note note);

@@ -35,6 +35,10 @@ public class Note {
         this.note_text = note_text;
     }
 
+    public Note() {
+
+    }
+
     public int getNote_id() {
         return note_id;
     }
