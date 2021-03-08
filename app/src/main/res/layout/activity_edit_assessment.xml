@@ -43,6 +43,10 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
             android:layout_height="470dp"
@@ -130,7 +134,7 @@
                     android:paddingTop="15dp"/>
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/saveAssessmentButton"
+                    android:id="@+id/editAssessmentButton"
                     android:onClick="onUpdateAssessment"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="5dp"
@@ -149,6 +153,8 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        </ScrollView>
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +63,7 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         courseAssessmentsList.setOnItemClickListener((parent, view, position, id) -> {
             Intent assessmentIntent = new Intent(getApplicationContext(), SingleAssessmentDetailActivity.class);
             assessmentIntent.putExtra("assessmentId", courseAssessment.get(position).getAssessment_Id());
+            assessmentIntent.putExtra("courseId", courseId);
             startActivity(assessmentIntent);
         });
 
@@ -121,5 +123,11 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.subscreen_menu, menu);
         return true;
+    }
+
+    public void onAddAssessmentToClass(View view) {
+        Intent intent = new Intent(SingleCourseDetailActivity.this, AddAssessmentActivity.class);
+        intent.putExtra("courseId", courseId);
+        startActivity(intent);
     }
 }

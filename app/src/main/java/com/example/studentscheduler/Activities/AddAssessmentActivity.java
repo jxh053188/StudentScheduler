@@ -22,14 +22,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddAssessmentActivity extends AppCompatActivity {
-    AppDatabase db;
-    EditText assessmentName;
-    Spinner assessmentType;
-    EditText assessmentDate;
-    Spinner assessmentStatus;
-    String selectedType;
-    String selectedStatus;
-    boolean addSuccessful;
+    private AppDatabase db;
+    private EditText assessmentName;
+    private Spinner assessmentType;
+    private EditText assessmentDate;
+    private Spinner assessmentStatus;
+    private String selectedType;
+    private String selectedStatus;
+    private boolean addSuccessful;
+    private Assessment assessment;
+    private int courseId;
 
 
     @Override
@@ -38,6 +40,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_assessment);
         db = AppDatabase.getInstance(AddAssessmentActivity.this);
         Intent intent = getIntent();
+        courseId = intent.getIntExtra("courseId", -1);
         assessmentName = findViewById(R.id.assessmentNameInput);
         assessmentDate = findViewById(R.id.assessmentDateInput);
 
@@ -92,11 +95,11 @@ public class AddAssessmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    onSaveAssessment();
+                    assessment = onSaveAssessment();
                 } catch (ParseException e){
                     e.printStackTrace();
                 } if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
             }
@@ -105,7 +108,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
 
     }
 
-    public void onSaveAssessment() throws ParseException {
+    public Assessment onSaveAssessment() throws ParseException {
         SimpleDateFormat format;
         format = new SimpleDateFormat("MM/dd/yyyy");
         String aName = assessmentName.getText().toString();
@@ -125,8 +128,11 @@ public class AddAssessmentActivity extends AppCompatActivity {
         assessment.setAssessment_status(selectedStatus);
         assessment.setAssessment_type(selectedType);
         assessment.setAssessment_due_date(dueDate);
+        assessment.setCourse_id_fk(courseId);
         db.assessmentDao().insertAssessment(assessment);
         Toast.makeText(this,"New Assessment is saved", Toast.LENGTH_SHORT).show();
         addSuccessful = true;
+
+        return assessment;
     }
 }

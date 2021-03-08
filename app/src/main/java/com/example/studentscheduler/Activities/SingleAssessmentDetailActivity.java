@@ -20,10 +20,12 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
     AppDatabase db;
 
     private int assessmentId;
+    private int courseId;
     private TextView assessmentName;
     private TextView assessmentType;
     private TextView assessmentStatus;
     private TextView assessmentDueDate;
+
 
 
     @Override
@@ -38,6 +40,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         assessmentType = findViewById(R.id.assessmentDetailType);
         assessmentStatus = findViewById(R.id.assessmentDetailStatus);
         assessmentDueDate = findViewById(R.id.assessmentDetailDueDate);
+        courseId = intent.getIntExtra("courseId" ,-1);
 
         setAssessmentInfo();
     }
@@ -56,6 +59,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         assessmentStatus.setText(status);
         assessmentDueDate.setText(dueDate);
         assessmentType.setText(type);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +74,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         if(optionId == R.id.editItem){
             Intent intent = new Intent(getApplicationContext(),EditAssessmentActivity.class);
             intent.putExtra("assessmentId", assessmentId);
+            intent.putExtra("courseId", courseId);
             startActivity(intent);
 
         }

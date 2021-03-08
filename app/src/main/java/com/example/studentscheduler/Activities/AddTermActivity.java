@@ -30,6 +30,7 @@ public class AddTermActivity extends AppCompatActivity {
     private boolean addSuccessful;
     private String choosenStatus;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
