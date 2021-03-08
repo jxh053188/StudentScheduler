@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
@@ -43,5 +45,11 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
         instructorName.setText(name);
         instructorEmail.setText(email);
         instructorPhone.setText(phone);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.subscreen_menu, menu);
+        return true;
     }
 }

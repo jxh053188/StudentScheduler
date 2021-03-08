@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SingleCourseDetailActivity extends AppCompatActivity {
@@ -76,12 +79,13 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
     }
 
     private void setCourseInfo(){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Course course = new Course();
         course = db.courseDao().getCourse(termId, courseId);
         String name = course.getCourse_name();
         String status = course.getCourse_status();
-        String start = course.getCourse_start().toString();
-        String end = course.getCourse_end().toString();
+        String start = sdf.format(course.getCourse_start());
+        String end = sdf.format(course.getCourse_end());
 
         courseName.setText(name);
         courseStatus.setText(status);
@@ -111,5 +115,11 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         courseNotesList.setAdapter(arrayAdapter);
         this.courseNotes = courseNotes;
         arrayAdapter.notifyDataSetChanged();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.subscreen_menu, menu);
+        return true;
     }
 }

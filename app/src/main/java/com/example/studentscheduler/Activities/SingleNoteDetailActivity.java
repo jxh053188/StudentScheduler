@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
@@ -38,5 +40,11 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
 
         noteTitle.setText(title);
         noteText.setText(text);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.subscreen_menu, menu);
+        return true;
     }
 }

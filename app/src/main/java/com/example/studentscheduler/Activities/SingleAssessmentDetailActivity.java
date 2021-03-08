@@ -4,20 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SingleAssessmentDetailActivity extends AppCompatActivity {
     AppDatabase db;
 
-    int assessmentId;
-    TextView assessmentName;
-    TextView assessmentType;
-    TextView assessmentStatus;
-    TextView assessmentDueDate;
+    private int assessmentId;
+    private TextView assessmentName;
+    private TextView assessmentType;
+    private TextView assessmentStatus;
+    private TextView assessmentDueDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +43,44 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
     }
 
     private void setAssessmentInfo(){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Assessment assessment = new Assessment();
         assessment = db.assessmentDao().getSingleAssessment(assessmentId);
         String name = assessment.getAssessment_name();
         String status = assessment.getAssessment_status();
         String type = assessment.getAssessment_type();
-        String date = assessment.getAssessment_due_date().toString();
+        Date date = assessment.getAssessment_due_date();
+        String dueDate = sdf.format(date);
 
         assessmentName.setText(name);
         assessmentStatus.setText(status);
-        assessmentDueDate.setText(date);
+        assessmentDueDate.setText(dueDate);
         assessmentType.setText(type);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.subscreen_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int optionId = item.getItemId();
+
+        if(optionId == R.id.editItem){
+            Intent intent = new Intent(getApplicationContext(),EditAssessmentActivity.class);
+            intent.putExtra("assessmentId", assessmentId);
+            startActivity(intent);
+
+        }
+
+        if (optionId == R.id.notifyOption);{
+
+        }
+
+        if(optionId == R.id.deleteItem);{
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

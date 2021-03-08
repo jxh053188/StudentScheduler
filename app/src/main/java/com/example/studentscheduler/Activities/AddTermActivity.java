@@ -78,7 +78,7 @@ public class AddTermActivity extends AppCompatActivity {
 
     public Term onSaveTerm() throws ParseException {
         SimpleDateFormat format;
-        format = new SimpleDateFormat("MM/dd/yyy");
+        format = new SimpleDateFormat("MM/dd/yyyy");
         String termName = termNameInput.getText().toString();
         String startDate = termStartDateInput.getText().toString();
         String endDate = termEndDateInput.getText().toString();

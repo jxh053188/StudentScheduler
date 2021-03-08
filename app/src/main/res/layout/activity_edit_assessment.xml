@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cut_card_background"
+    tools:context=".Activities.AddAssessmentActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="380dp"
+            android:layout_height="180dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:layout_gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_assessment"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update Assessment"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"/>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="380dp"
+            android:layout_height="470dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/assessmentNameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assessment Name"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+                <EditText
+                    android:id="@+id/editAssessmentNameInput"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
+
+                <TextView
+                    android:id="@+id/assessmentTypeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assessment Type"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+                <Spinner
+                    android:id="@+id/editAssessmentTypeSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:outlineProvider="bounds"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
+
+                <TextView
+                    android:id="@+id/assessmentDueDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Due Date"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+
+                <EditText
+                    android:id="@+id/editAssessmentDateInput"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_gravity="center_horizontal"
+                    android:inputType="date"
+                    android:paddingTop="15dp"
+                    android:hint="mm/dd/yyyy"/>
+
+                <TextView
+                    android:id="@+id/assessmentDStatusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assessment Status"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+                <Spinner
+                    android:id="@+id/editAssessmentStatusSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:outlineProvider="bounds"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/saveAssessmentButton"
+                    android:onClick="onUpdateAssessment"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:backgroundTint="#5BCBFF"
+                    android:layout_gravity="center_horizontal"
+                    app:icon="@drawable/ic_baseline_save_24"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:text="Save"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
