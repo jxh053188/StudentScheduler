@@ -61,7 +61,6 @@ public class AddTermActivity extends AppCompatActivity {
 
 
         Button saveButton = findViewById(R.id.saveTermButton);
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

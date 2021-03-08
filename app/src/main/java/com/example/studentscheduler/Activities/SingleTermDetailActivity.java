@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +18,7 @@ import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Term;
 import com.example.studentscheduler.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -28,6 +32,8 @@ public class SingleTermDetailActivity extends AppCompatActivity {
     TextView termStatus;
     ListView termCoursesView;
     List<Course> termCourses;
+    private Term term;
+    boolean updateSuccessful;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class SingleTermDetailActivity extends AppCompatActivity {
             startActivity(intent1);
             System.out.println(id);
         });
+
     }
 
     private void setTermInfo(){
@@ -82,5 +89,25 @@ public class SingleTermDetailActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.subscreen_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int optionId = item.getItemId();
+
+        if(optionId == R.id.editItem){
+            Intent intent = new Intent(getApplicationContext(),EditTermActivity.class);
+            intent.putExtra("termId", termId);
+            startActivity(intent);
+
+        }
+
+        if (optionId == R.id.notifyOption);{
+
+        }
+
+        if(optionId == R.id.deleteItem);{
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
