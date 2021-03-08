@@ -9,21 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
-        <activity android:name=".Activities.SingleTermDetailActivity"
-            android:parentActivityName=".Activities.AllTermsActivity"
-            android:label="Term Details"/>
-        <activity android:name=".Activities.AddTermActivity"
-            android:parentActivityName=".Activities.AllTermsActivity"
-            android:label="Add New Term"/>
-        <activity android:name=".Activities.AllInstructorsActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:label="Instructors List"/>
-        <activity android:name=".Activities.AllCoursesActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:label="Courses List"/>
-        <activity android:name=".Activities.AllTermsActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:label="Terms List"/>
+        <activity android:name=".Activities.SingleCourseDetailActivity"
+            android:parentActivityName=".Activities.AllCoursesActivity"
+            android:label="Course Details"/>
+        <activity
+            android:name=".Activities.SingleTermDetailActivity"
+            android:label="Term Details"
+            android:parentActivityName=".Activities.AllTermsActivity" />
+        <activity
+            android:name=".Activities.AddTermActivity"
+            android:label="Add New Term"
+            android:parentActivityName=".Activities.AllTermsActivity" />
+        <activity
+            android:name=".Activities.AllInstructorsActivity"
+            android:label="Instructors List"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.AllCoursesActivity"
+            android:label="Courses List"
+            android:parentActivityName=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.AllTermsActivity"
+            android:label="Terms List"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
