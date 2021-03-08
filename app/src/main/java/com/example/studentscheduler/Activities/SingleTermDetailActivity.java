@@ -42,6 +42,14 @@ public class SingleTermDetailActivity extends AppCompatActivity {
 
         setTermInfo();
         setCourseList();
+
+        termCoursesView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+            intent1.putExtra("termId", termId);
+            intent1.putExtra("courseId", termCourses.get(position).getCourse_id());
+            startActivity(intent1);
+            System.out.println(id);
+        });
     }
 
     private void setTermInfo(){

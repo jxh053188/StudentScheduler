@@ -10,13 +10,15 @@ import androidx.room.TypeConverters;
 import com.example.studentscheduler.DAO.AssessmentDao;
 import com.example.studentscheduler.DAO.CourseDao;
 import com.example.studentscheduler.DAO.InstructorDao;
+import com.example.studentscheduler.DAO.NoteDao;
 import com.example.studentscheduler.DAO.TermDao;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Instructor;
+import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.Entities.Term;
 
-@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class}, exportSchema = false, version =  1)
+@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class, Note.class}, exportSchema = false, version = 2)
 @TypeConverters({Converters.class})
 
 public abstract class AppDatabase extends RoomDatabase {
@@ -26,7 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static synchronized AppDatabase getInstance(Context context){
         if(instance == null){
-            instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME).allowMainThreadQueries().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build();
         }
         return instance;
     }
@@ -35,6 +37,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CourseDao courseDao();
     public abstract AssessmentDao assessmentDao();
     public abstract InstructorDao instructorDao();
+    public abstract NoteDao noteDao();
 
 }
 
