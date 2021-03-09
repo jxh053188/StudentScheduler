@@ -87,7 +87,6 @@ public class AddTermActivity extends AppCompatActivity {
 
         if(termName.trim().isEmpty()){
             Toast.makeText(this, "Please enter a term name",Toast.LENGTH_SHORT).show();
-            return null;
         }
 
         assert startDateDate != null;

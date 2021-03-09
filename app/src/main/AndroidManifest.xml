@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
-        <activity android:name=".Activities.AddCourseActivity"></activity>
+        <activity android:name=".Activities.EditInstructorActivity"></activity>
+        <activity android:name=".Activities.AddInstructorActivity" />
+        <activity android:name=".Activities.AddCourseActivity" />
         <activity android:name=".Activities.EditTermActivity" />
         <activity android:name=".Activities.EditCourseActivity" />
         <activity android:name=".Activities.EditAssessmentActivity" />

@@ -71,12 +71,14 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         courseInstructorsList.setOnItemClickListener((parent, view, position, id) -> {
             Intent instructorIntent = new Intent(getApplicationContext(), SingleInstructorDetailActivity.class);
             instructorIntent.putExtra("instructorId", courseInstructor.get(position).getInstructor_id());
+            instructorIntent.putExtra("courseId", courseId);
             startActivity(instructorIntent);
         });
 
         courseNotesList.setOnItemClickListener((parent, view, position, id) -> {
             Intent noteIntent = new Intent(getApplicationContext(), SingleNoteDetailActivity.class);
             noteIntent.putExtra("noteId", courseNotes.get(position).getNote_id());
+            noteIntent.putExtra("courseId", courseId);
             startActivity(noteIntent);
         });
     }
@@ -149,6 +151,13 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
 
     public void onAddAssessmentToClass(View view) {
         Intent intent = new Intent(SingleCourseDetailActivity.this, AddAssessmentActivity.class);
+        intent.putExtra("courseId", courseId);
+        startActivity(intent);
+    }
+
+
+    public void onAddInstructorToClass(View view) {
+        Intent intent = new Intent(SingleCourseDetailActivity.this, AddInstructorActivity.class);
         intent.putExtra("courseId", courseId);
         startActivity(intent);
     }

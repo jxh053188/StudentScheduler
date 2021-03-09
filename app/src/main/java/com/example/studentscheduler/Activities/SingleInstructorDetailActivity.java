@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
@@ -19,6 +20,7 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
     TextView instructorName;
     TextView instructorEmail;
     TextView instructorPhone;
+    int courseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
         db = AppDatabase.getInstance(getApplicationContext());
 
         instructorId = intent.getIntExtra("instructorId", -1);
+        courseId = intent.getIntExtra("courseId", -1);
         instructorName = findViewById(R.id.instructorDetailName);
         instructorEmail = findViewById(R.id.instructorDetailEmail);
         instructorPhone = findViewById(R.id.instructorDetailPhone);
@@ -51,5 +54,26 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.subscreen_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int optionId = item.getItemId();
+
+        if(optionId == R.id.editItem){
+            Intent intent = new Intent(getApplicationContext(),EditInstructorActivity.class);
+            intent.putExtra("courseId", courseId);
+            intent.putExtra("instructorId", instructorId);
+            startActivity(intent);
+
+        }
+
+        if (optionId == R.id.notifyOption);{
+
+        }
+
+        if(optionId == R.id.deleteItem);{
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
