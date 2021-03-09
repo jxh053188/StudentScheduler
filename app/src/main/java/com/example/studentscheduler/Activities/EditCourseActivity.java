@@ -76,8 +76,11 @@ public class EditCourseActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                    intent.putExtra("courseId", courseId);
+                    intent.putExtra("termId", termId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

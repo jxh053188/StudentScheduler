@@ -78,8 +78,10 @@ public class EditTermActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleTermDetailActivity.class);
+                    intent.putExtra("termId", termId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

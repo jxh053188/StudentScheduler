@@ -99,7 +99,7 @@ public class SingleTermDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),EditTermActivity.class);
             intent.putExtra("termId", termId);
             startActivity(intent);
-
+            finish();
         }
 
         if (optionId == R.id.notifyOption){
@@ -125,6 +125,7 @@ public class SingleTermDetailActivity extends AppCompatActivity {
                         db.termDao().deleteTerm(term);
                         Intent intent = new Intent(SingleTermDetailActivity.this, AllTermsActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
             });

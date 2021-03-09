@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AddAssessmentActivity extends AppCompatActivity {
     private AppDatabase db;
@@ -32,6 +34,9 @@ public class AddAssessmentActivity extends AppCompatActivity {
     private boolean addSuccessful;
     private Assessment assessment;
     private int courseId;
+    private int numAssessments;
+    private List<Assessment> assessmentList;
+    private int termId;
 
 
     @Override
@@ -41,6 +46,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
         db = AppDatabase.getInstance(AddAssessmentActivity.this);
         Intent intent = getIntent();
         courseId = intent.getIntExtra("courseId", -1);
+        termId = intent.getIntExtra("termId", -1);
         assessmentName = findViewById(R.id.assessmentNameInput);
         assessmentDate = findViewById(R.id.assessmentDateInput);
 
@@ -94,45 +100,65 @@ public class AddAssessmentActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    assessment = onSaveAssessment();
-                } catch (ParseException e){
-                    e.printStackTrace();
-                } if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                if (numAssessments > 4) {
+                        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddAssessmentActivity.this);
+                        builder.setTitle("Error");
+                        builder.setMessage("A class cannot have more than 5 assessments");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                        builder.show();
+                } else {
+                    try {
+                        onSaveAssessment();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (addSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                        intent.putExtra("courseId", courseId);
+                        intent.putExtra("termId", termId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
 
+        assessmentList = db.assessmentDao().getAssessmentList(courseId);
+        numAssessments = assessmentList.size();
+
 
     }
 
-    public Assessment onSaveAssessment() throws ParseException {
-        SimpleDateFormat format;
-        format = new SimpleDateFormat("MM/dd/yyyy");
-        String aName = assessmentName.getText().toString();
-        String date = assessmentDate.getText().toString();
-        Date dueDate = format.parse(date);
+    public void onSaveAssessment() throws ParseException {
+            SimpleDateFormat format;
+            format = new SimpleDateFormat("MM/dd/yyyy");
+            String aName = assessmentName.getText().toString();
+            String date = assessmentDate.getText().toString();
+            Date dueDate = format.parse(date);
 
-        if(aName.trim().isEmpty()){
-            Toast.makeText(this,"Name cannot be empty", Toast.LENGTH_SHORT).show();
+            if (aName.trim().isEmpty()) {
+                Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
+            }
+
+            if (date.trim().isEmpty()) {
+                Toast.makeText(this, "Date cannot be empty", Toast.LENGTH_SHORT).show();
+            }
+
+
+            Assessment assessment = new Assessment();
+            assessment.setAssessment_name(aName);
+            assessment.setAssessment_status(selectedStatus);
+            assessment.setAssessment_type(selectedType);
+            assessment.setAssessment_due_date(dueDate);
+            assessment.setCourse_id_fk(courseId);
+            db.assessmentDao().insertAssessment(assessment);
+            Toast.makeText(this, "New Assessment is saved", Toast.LENGTH_SHORT).show();
+            addSuccessful = true;
+
         }
-
-        if(date.trim().isEmpty()){
-            Toast.makeText(this,"Date cannot be empty", Toast.LENGTH_SHORT).show();
-        }
-
-        Assessment assessment = new Assessment();
-        assessment.setAssessment_name(aName);
-        assessment.setAssessment_status(selectedStatus);
-        assessment.setAssessment_type(selectedType);
-        assessment.setAssessment_due_date(dueDate);
-        assessment.setCourse_id_fk(courseId);
-        db.assessmentDao().insertAssessment(assessment);
-        Toast.makeText(this,"New Assessment is saved", Toast.LENGTH_SHORT).show();
-        addSuccessful = true;
-
-        return assessment;
     }
-}

@@ -110,7 +110,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="380dp"
-                android:layout_height="380dp"
+                android:layout_height="480dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
@@ -137,8 +137,9 @@
                 <ListView
                     android:id="@+id/singleCourseAssessmentListView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     android:background="#FFFBF3"
+
                     android:paddingTop="20dp"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

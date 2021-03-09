@@ -79,6 +79,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
             intent.putExtra("assessmentId", assessmentId);
             intent.putExtra("courseId", courseId);
             startActivity(intent);
+            finish();
 
         }
 
@@ -98,6 +99,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
                     db.assessmentDao().deleteAssessment(assessment);
                     Intent intent = new Intent(SingleAssessmentDetailActivity.this, AllTermsActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
             builder.setNegativeButton("Cancel", null);

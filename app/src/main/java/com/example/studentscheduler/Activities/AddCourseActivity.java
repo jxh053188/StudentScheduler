@@ -74,8 +74,10 @@ public class AddCourseActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleTermDetailActivity.class);
+                    intent.putExtra("termId", termId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

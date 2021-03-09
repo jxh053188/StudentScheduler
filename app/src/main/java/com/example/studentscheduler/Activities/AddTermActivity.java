@@ -69,8 +69,9 @@ public class AddTermActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

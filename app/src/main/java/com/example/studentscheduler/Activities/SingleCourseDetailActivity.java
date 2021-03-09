@@ -169,19 +169,25 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
     public void onAddAssessmentToClass(View view) {
         Intent intent = new Intent(SingleCourseDetailActivity.this, AddAssessmentActivity.class);
         intent.putExtra("courseId", courseId);
+        intent.putExtra("termId", termId);
         startActivity(intent);
+        finish();
     }
 
 
     public void onAddInstructorToClass(View view) {
         Intent intent = new Intent(SingleCourseDetailActivity.this, AddInstructorActivity.class);
         intent.putExtra("courseId", courseId);
+        intent.putExtra("termId", termId);
         startActivity(intent);
+        finish();
     }
 
     public void onAddNoteToCourse(View view) {
         Intent intent = new Intent(SingleCourseDetailActivity.this,AddNoteActivity.class);
         intent.putExtra("courseId", courseId);
+        intent.putExtra("termId", termId);
         startActivity(intent);
+        finish();
     }
 }

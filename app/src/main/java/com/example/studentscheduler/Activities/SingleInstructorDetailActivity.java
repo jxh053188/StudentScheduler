@@ -68,6 +68,7 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
             intent.putExtra("courseId", courseId);
             intent.putExtra("instructorId", instructorId);
             startActivity(intent);
+            finish();
 
         }
 
@@ -88,6 +89,7 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
                     db.instructorDao().deleteInstructor(instructor);
                     Intent intent = new Intent(SingleInstructorDetailActivity.this, AllTermsActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
             builder.setNegativeButton("Cancel", null);

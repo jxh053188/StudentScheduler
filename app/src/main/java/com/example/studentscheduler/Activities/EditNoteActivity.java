@@ -47,8 +47,11 @@ public class EditNoteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (updateSuccessful = true) {
-                    Intent intent = new Intent(getApplicationContext(), AddTermActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleNoteDetailActivity.class);
+                    intent.putExtra("noteId", noteId);
+                    intent.putExtra("courseId", courseId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

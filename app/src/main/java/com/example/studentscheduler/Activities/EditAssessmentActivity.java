@@ -105,8 +105,11 @@ public class EditAssessmentActivity extends AppCompatActivity {
                 } catch (ParseException e){
                     e.printStackTrace();
                 } if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleAssessmentDetailActivity.class);
+                    intent.putExtra("courseId", courseId);
+                    intent.putExtra("assessmentId", assessmentId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

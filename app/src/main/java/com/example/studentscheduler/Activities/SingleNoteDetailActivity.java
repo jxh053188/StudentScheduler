@@ -65,6 +65,7 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
             intent.putExtra("courseId", courseId);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
+            finish();
 
         }
 
@@ -84,6 +85,7 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
                     db.noteDao().deleteNote(note);
                     Intent intent = new Intent(SingleNoteDetailActivity.this, AllTermsActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
             builder.setNegativeButton("Cancel", null);

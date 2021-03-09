@@ -20,6 +20,7 @@ public class AddNoteActivity extends AppCompatActivity {
     private EditText noteTitle;
     private EditText noteText;
     private boolean addSuccessful;
+    private int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class AddNoteActivity extends AppCompatActivity {
         courseId = intent.getIntExtra("courseId",-1);
         noteTitle = findViewById(R.id.noteTitleInput);
         noteText = findViewById(R.id.noteTextInput);
+        termId = intent.getIntExtra("termId", -1);
 
         Button saveButton = findViewById(R.id.saveNoteButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +44,11 @@ public class AddNoteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (addSuccessful = true) {
-                    Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                    intent.putExtra("courseId", courseId);
+                    intent.putExtra("termId", termId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

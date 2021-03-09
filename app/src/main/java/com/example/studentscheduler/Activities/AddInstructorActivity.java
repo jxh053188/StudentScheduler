@@ -24,6 +24,7 @@ public class AddInstructorActivity extends AppCompatActivity {
     private int courseId;
     private Instructor instructor;
     private boolean addSuccessful;
+    private int termId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class AddInstructorActivity extends AppCompatActivity {
         instructorName = findViewById(R.id.instructorNameInput);
         instructorEmail = findViewById(R.id.instructorEmailInput);
         instructorPhone = findViewById(R.id.instructorPhoneInput);
+        termId = intent.getIntExtra("termId", -1);
 
         Button saveButton = findViewById(R.id.saveInstructorButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +47,11 @@ public class AddInstructorActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                    intent.putExtra("termId", termId);
+                    intent.putExtra("courseId", courseId);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
