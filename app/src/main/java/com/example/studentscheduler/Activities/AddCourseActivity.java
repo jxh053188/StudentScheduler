@@ -20,35 +20,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class EditCourseActivity extends AppCompatActivity {
+public class AddCourseActivity extends AppCompatActivity {
     private AppDatabase db;
     private EditText courseName;
+    private Spinner courseStatus;
     private EditText courseStart;
     private EditText courseEnd;
-    private Spinner courseStatus;
-    private Course course;
-    private boolean updateSuccessful;
-    private String selectedStatus;
-    private int courseId;
     private int termId;
+    private boolean addSuccessful;
+    private String selectedStatus;
+    private Course course;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_course);
-        db = AppDatabase.getInstance(EditCourseActivity.this);
-        Intent intent = getIntent();
-        courseId = intent.getIntExtra("courseId", -1);
+        setContentView(R.layout.activity_add_course);
+        db = AppDatabase.getInstance(AddCourseActivity.this);
+        courseName = findViewById(R.id.courseNameInput);
+        courseStart = findViewById(R.id.courseStartDateInput);
+        courseEnd = findViewById(R.id.courseEndDateInput);
+        intent = getIntent();
         termId = intent.getIntExtra("termId", -1);
-        courseName = findViewById(R.id.editCourseNameInput);
-        courseStart = findViewById(R.id.editCourseStartDateInput);
-        courseEnd = findViewById(R.id.editCourseEndDateInput);
+
 
         String[] courseSpinner = new String[]{
                 "In Progress", "Completed", "Dropped", "Plan To Take"
         };
-        //Set status spinner options
-        courseStatus = findViewById(R.id.editCourseStatusSpinner);
+         //Set status spinner options
+        courseStatus = findViewById(R.id.courseStatusSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, courseSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courseStatus.setAdapter(adapter);
@@ -65,17 +65,15 @@ public class EditCourseActivity extends AppCompatActivity {
             }
         });
 
-        setCourseInfo();
-
-        Button saveButton = findViewById(R.id.updateCourseButton);
+        Button saveButton = findViewById(R.id.saveCourseButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    course = onUpdateCourse();
+                    course = onSaveCourse();
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }if (updateSuccessful = true){
+                }if (addSuccessful = true){
                     Intent intent = new Intent(getApplicationContext(), AllTermsActivity.class);
                     startActivity(intent);
                 }
@@ -83,31 +81,7 @@ public class EditCourseActivity extends AppCompatActivity {
         });
     }
 
-    private int getIndex(Spinner spinner, String myString) {
-        for (int i = 0; i < spinner.getCount(); i++) {
-            if (spinner.getItemAtPosition(i).toString().equals(myString)) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    private void setCourseInfo(){
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        Course course = new Course();
-        course = db.courseDao().getCourse(termId, courseId);
-        String name = course.getCourse_name();
-        String status = course.getCourse_status();
-        String start = sdf.format(course.getCourse_start());
-        String end = sdf.format(course.getCourse_end());
-
-        courseName.setText(name);
-        courseStatus.setSelection(getIndex(courseStatus, status));
-        courseStart.setText(start);
-        courseEnd.setText(end);
-    }
-
-    private Course onUpdateCourse() throws ParseException {
+    public Course onSaveCourse() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         String name = courseName.getText().toString();
         String start = courseStart.getText().toString();
@@ -141,10 +115,9 @@ public class EditCourseActivity extends AppCompatActivity {
         course.setCourse_start(startDate);
         course.setCourse_end(endDate);
         course.setTerm_id_fk(termId);
-        course.setCourse_id(courseId);
-        db.courseDao().updateCourse(course);
-        Toast.makeText(this,"Course Updated",Toast.LENGTH_SHORT).show();
-        updateSuccessful = true;
+        db.courseDao().insertCourse(course);
+        Toast.makeText(this,"Course added",Toast.LENGTH_SHORT).show();
+        addSuccessful = true;
 
         return course;
     }

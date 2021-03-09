@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -123,6 +124,27 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.subscreen_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int optionId = item.getItemId();
+
+        if(optionId == R.id.editItem){
+            Intent intent = new Intent(getApplicationContext(),EditCourseActivity.class);
+            intent.putExtra("courseId", courseId);
+            intent.putExtra("termId", termId);
+            startActivity(intent);
+
+        }
+
+        if (optionId == R.id.notifyOption);{
+
+        }
+
+        if(optionId == R.id.deleteItem);{
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onAddAssessmentToClass(View view) {

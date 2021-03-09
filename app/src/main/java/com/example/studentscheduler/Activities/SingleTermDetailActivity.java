@@ -110,4 +110,10 @@ public class SingleTermDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void onAddClassToTerm(View view) {
+        Intent intent = new Intent(getApplicationContext(),AddCourseActivity.class);
+        intent.putExtra("termId", termId);
+        startActivity(intent);
+    }
 }

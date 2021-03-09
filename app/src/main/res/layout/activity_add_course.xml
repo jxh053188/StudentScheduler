@@ -49,7 +49,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit Course"
+                    android:text="Add Course"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack"
                     android:textSize="16dp" />
@@ -90,7 +90,7 @@
                         android:textColor="@color/black"/>
 
                     <EditText
-                        android:id="@+id/editCourseNameInput"
+                        android:id="@+id/courseNameInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -110,7 +110,7 @@
                         android:text="Course Status: "/>
 
                     <Spinner
-                        android:id="@+id/editCourseStatusSpinner"
+                        android:id="@+id/courseStatusSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:outlineProvider="bounds" />
@@ -129,7 +129,7 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/editCourseStartDateInput"
+                        android:id="@+id/courseStartDateInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -151,7 +151,7 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/editCourseEndDateInput"
+                        android:id="@+id/courseEndDateInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -167,7 +167,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="40dp">
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/updateCourseButton"
+                        android:id="@+id/saveCourseButton"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="5dp"
