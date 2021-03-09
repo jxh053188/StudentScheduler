@@ -2,17 +2,22 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class SingleNoteDetailActivity extends AppCompatActivity {
     private AppDatabase db;
@@ -63,13 +68,28 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption);{
+        if (optionId == R.id.notifyOption){
 
         }
 
-        if(optionId == R.id.deleteItem);{
-
+        if(optionId == R.id.deleteItem){
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleNoteDetailActivity.this);
+            builder.setTitle("Delete Note");
+            builder.setMessage("Are you sure you want to delete this note?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Note note = new Note();
+                    note = db.noteDao().getSingleNote(noteId);
+                    db.noteDao().deleteNote(note);
+                    Intent intent = new Intent(SingleNoteDetailActivity.this, AllTermsActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            builder.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

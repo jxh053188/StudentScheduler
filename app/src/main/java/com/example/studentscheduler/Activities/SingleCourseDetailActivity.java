@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
@@ -18,6 +20,7 @@ import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -139,12 +142,26 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption);{
+        if (optionId == R.id.notifyOption){
 
         }
 
-        if(optionId == R.id.deleteItem);{
-
+        if(optionId == R.id.deleteItem){
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleCourseDetailActivity.this);
+            builder.setTitle("Delete Course");
+            builder.setMessage("Are you sure you want to delete this course?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Course course = new Course();
+                    course = db.courseDao().getCurrentCourse(courseId);
+                    db.courseDao().deleteCourse(course);
+                    Intent intent = new Intent(SingleCourseDetailActivity.this, AllTermsActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            builder.show();
         }
         return super.onOptionsItemSelected(item);
     }

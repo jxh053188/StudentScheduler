@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
+import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,12 +82,26 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption);{
+        if (optionId == R.id.notifyOption){
 
         }
 
-        if(optionId == R.id.deleteItem);{
-
+        if(optionId == R.id.deleteItem){
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleAssessmentDetailActivity.this);
+            builder.setTitle("Delete Assessment");
+            builder.setMessage("Are you sure you want to delete this assessment?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Assessment assessment = new Assessment();
+                    assessment = db.assessmentDao().getSingleAssessment(assessmentId);
+                    db.assessmentDao().deleteAssessment(assessment);
+                    Intent intent = new Intent(SingleAssessmentDetailActivity.this, AllTermsActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            builder.show();
         }
         return super.onOptionsItemSelected(item);
     }

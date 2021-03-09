@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Term;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +34,6 @@ public class SingleTermDetailActivity extends AppCompatActivity {
     TextView termStatus;
     ListView termCoursesView;
     List<Course> termCourses;
-    private Term term;
     boolean updateSuccessful;
 
     @Override
@@ -101,11 +102,34 @@ public class SingleTermDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption);{
+        if (optionId == R.id.notifyOption){
 
         }
 
-        if(optionId == R.id.deleteItem);{
+        if(optionId == R.id.deleteItem){
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleTermDetailActivity.this);
+            builder.setTitle("Delete Course");
+            builder.setMessage("Are you sure you want to delete this course?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Term term = new Term();
+                    term = db.termDao().getTerm(termId);
+                    if(!termCourses.isEmpty()) {
+                        MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(SingleTermDetailActivity.this);
+                        builder1.setTitle("Error");
+                        builder1.setMessage("Cannot delete term with classes");
+                        builder1.show();
+                    }
+                    else{
+                        db.termDao().deleteTerm(term);
+                        Intent intent = new Intent(SingleTermDetailActivity.this, AllTermsActivity.class);
+                        startActivity(intent);
+                    }
+                }
+            });
+            builder.setNegativeButton("Cancel", null);
+            builder.show();
 
         }
         return super.onOptionsItemSelected(item);

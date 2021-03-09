@@ -21,8 +21,8 @@ public interface CourseDao {
     @Query("SELECT * FROM course_table")
     List<Course> getAllCourses();
 
-    @Query("SELECT * FROM course_table WHERE term_id_fk = :termID ORDER BY course_id DESC LIMIT 1")
-    Course getCurrentCourse(int termID);
+    @Query("SELECT * FROM course_table WHERE course_id = :courseID")
+    Course getCurrentCourse(int courseID);
 
     @Insert
     void insertCourse(Course course);
