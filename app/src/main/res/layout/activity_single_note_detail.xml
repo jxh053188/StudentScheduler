@@ -37,8 +37,18 @@
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
-
             </LinearLayout>
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/noteShareButton"
+                android:onClick="onShareNote"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="50dp"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#FFFFFF"
+                android:layout_gravity="bottom"
+                app:icon="@drawable/ic_baseline_share_24"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -79,6 +89,8 @@
                     android:layout_gravity="center_horizontal"/>
 
             </LinearLayout>
+
+
         </androidx.cardview.widget.CardView>
 
 

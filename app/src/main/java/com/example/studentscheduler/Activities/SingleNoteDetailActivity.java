@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
     private int courseId;
     private TextView noteTitle;
     private TextView noteText;
+    private Button shareBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,8 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
         noteId = intent.getIntExtra("noteId", -1);
         noteTitle = findViewById(R.id.noteDetailTitle);
         noteText = findViewById(R.id.noteTextDetail);
-
         setNoteInfo();
+        shareBtn = findViewById(R.id.noteShareButton);
     }
 
     private void setNoteInfo(){
@@ -93,5 +96,22 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onShareNote(View view) {
+        Note note = new Note();
+        note = db.noteDao().getSingleNote(noteId);
+        String title = note.getNote_title().toString();
+        String text = note.getNote_text().toString();
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, title + "\n" + text);
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+
+
     }
 }
