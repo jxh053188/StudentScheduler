@@ -2,10 +2,12 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
@@ -13,10 +15,11 @@ import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.R;
 
 public class SingleNoteDetailActivity extends AppCompatActivity {
-    AppDatabase db;
-    int noteId;
-    TextView noteTitle;
-    TextView noteText;
+    private AppDatabase db;
+    private int noteId;
+    private int courseId;
+    private TextView noteTitle;
+    private TextView noteText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,7 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         db = AppDatabase.getInstance(getApplicationContext());
 
+        courseId = intent.getIntExtra("courseId",-1);
         noteId = intent.getIntExtra("noteId", -1);
         noteTitle = findViewById(R.id.noteDetailTitle);
         noteText = findViewById(R.id.noteTextDetail);
@@ -35,8 +39,8 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
     private void setNoteInfo(){
         Note note = new Note();
         note = db.noteDao().getSingleNote(noteId);
-        String title = note.getNote_title();
-        String text = note.getNote_text();
+        String title = note.getNote_title().toString();
+        String text = note.getNote_text().toString();
 
         noteTitle.setText(title);
         noteText.setText(text);
@@ -46,5 +50,26 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.subscreen_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int optionId = item.getItemId();
+
+        if(optionId == R.id.editItem){
+            Intent intent = new Intent(getApplicationContext(),EditNoteActivity.class);
+            intent.putExtra("courseId", courseId);
+            intent.putExtra("noteId", noteId);
+            startActivity(intent);
+
+        }
+
+        if (optionId == R.id.notifyOption);{
+
+        }
+
+        if(optionId == R.id.deleteItem);{
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

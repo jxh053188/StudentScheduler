@@ -161,4 +161,10 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         intent.putExtra("courseId", courseId);
         startActivity(intent);
     }
+
+    public void onAddNoteToCourse(View view) {
+        Intent intent = new Intent(SingleCourseDetailActivity.this,AddNoteActivity.class);
+        intent.putExtra("courseId", courseId);
+        startActivity(intent);
+    }
 }
