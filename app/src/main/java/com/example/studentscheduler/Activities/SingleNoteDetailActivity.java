@@ -63,17 +63,12 @@ public class SingleNoteDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int optionId = item.getItemId();
 
-        if(optionId == R.id.editItem){
-            Intent intent = new Intent(getApplicationContext(),EditNoteActivity.class);
+        if(optionId == R.id.editItem) {
+            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra("courseId", courseId);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
             finish();
-
-        }
-
-        if (optionId == R.id.notifyOption){
-
         }
 
         if(optionId == R.id.deleteItem){

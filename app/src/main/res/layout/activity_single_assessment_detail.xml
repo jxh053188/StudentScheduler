@@ -48,12 +48,6 @@
                     android:layout_gravity="bottom"
                     app:backgroundTint="#FFFFFF"
                     app:icon="@drawable/ic_notification"/>
-                <TextView
-                    android:id="@+id/assessmentAlertDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alert Date"/>
-
 
             </LinearLayout>
 

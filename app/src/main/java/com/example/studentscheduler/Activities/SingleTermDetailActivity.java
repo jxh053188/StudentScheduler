@@ -2,6 +2,10 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,18 +15,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Term;
+import com.example.studentscheduler.Notifications.CourseEndReceiver;
+import com.example.studentscheduler.Notifications.CourseStartReceiver;
+import com.example.studentscheduler.Notifications.TermStartReceiver;
 import com.example.studentscheduler.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SingleTermDetailActivity extends AppCompatActivity {
 
@@ -35,6 +45,11 @@ public class SingleTermDetailActivity extends AppCompatActivity {
     ListView termCoursesView;
     List<Course> termCourses;
     boolean updateSuccessful;
+    private DatePickerDialog.OnDateSetListener startDateListener;
+    private DatePickerDialog.OnDateSetListener endDateListener;
+    private Button notifyStartButton;
+    private Button notifyEndButton;
+    Calendar cal = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +64,8 @@ public class SingleTermDetailActivity extends AppCompatActivity {
         termEndDate = findViewById(R.id.singleTermEndDate);
         termStatus = findViewById(R.id.singleTermStatusLabel);
         termCoursesView = findViewById(R.id.classesAssignedToTermListView);
+        notifyStartButton = findViewById(R.id.termStartNotificationBtn);
+        notifyEndButton = findViewById(R.id.termEndNotification);
 
         setTermInfo();
         setCourseList();
@@ -60,6 +77,60 @@ public class SingleTermDetailActivity extends AppCompatActivity {
             startActivity(intent1);
             System.out.println(id);
         });
+
+        notifyStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(SingleTermDetailActivity.this, startDateListener,year, month, day).show();
+            }
+        });
+        startDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                cal.set(Calendar.YEAR,year);
+                cal.set(Calendar.MONTH,month);
+                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                String myformat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
+                Intent intent = new Intent(SingleTermDetailActivity.this, TermStartReceiver.class);
+                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                PendingIntent sender = PendingIntent.getBroadcast(SingleTermDetailActivity.this,0,intent,0);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                long trigger = cal.getTimeInMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+            }
+        };
+
+        notifyEndButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(SingleTermDetailActivity.this, endDateListener,year, month, day).show();
+            }
+        });
+        endDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                cal.set(Calendar.YEAR,year);
+                cal.set(Calendar.MONTH,month);
+                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                String myformat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
+                Intent intent = new Intent(SingleTermDetailActivity.this, TermStartReceiver.class);
+                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                PendingIntent sender = PendingIntent.getBroadcast(SingleTermDetailActivity.this,0,intent,0);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                long trigger = cal.getTimeInMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+            }
+        };
 
     }
 
@@ -100,10 +171,6 @@ public class SingleTermDetailActivity extends AppCompatActivity {
             intent.putExtra("termId", termId);
             startActivity(intent);
             finish();
-        }
-
-        if (optionId == R.id.notifyOption){
-
         }
 
         if(optionId == R.id.deleteItem){

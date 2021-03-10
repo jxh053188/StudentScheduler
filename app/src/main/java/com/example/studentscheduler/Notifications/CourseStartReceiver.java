@@ -15,20 +15,18 @@ import com.example.studentscheduler.R;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
-public class AssessmentReceiver extends BroadcastReceiver {
-
-    static int assessmentsNotificationID;
-    String channel_id="Assessments";
+public class CourseStartReceiver extends BroadcastReceiver {
+    static int notificationId = 20000;
+    String channel_id="CourseStart";
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,intent.getStringExtra("key"),Toast.LENGTH_LONG).show();
         createNotificationChannel(context,channel_id);
         Notification n= new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.drawable.ic_notification)
-                .setContentText(context.getResources().getString(R.string.assessment_text))
-                .setContentTitle(context.getResources().getString(R.string.assessment_title)).build();
+                .setContentText(context.getResources().getString(R.string.course_start_text))
+                .setContentTitle(context.getResources().getString(R.string.course_start_title)).build();
         NotificationManager notificationManager=(NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(assessmentsNotificationID++,n);
+        notificationManager.notify(notificationId++,n);
     }
 
     private void createNotificationChannel(Context context, String CHANNEL_ID) {
@@ -36,8 +34,8 @@ public class AssessmentReceiver extends BroadcastReceiver {
         // the NotificationChannel class is new and not in the support library
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = context.getResources().getString(R.string.assessment_channel);
-            String description = context.getString(R.string.assessment_channel_description);
+            CharSequence name = context.getResources().getString(R.string.course_start_channel);
+            String description = context.getString(R.string.course_start_channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);

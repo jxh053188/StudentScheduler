@@ -2,6 +2,12 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,11 +27,16 @@ import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.Entities.Note;
+import com.example.studentscheduler.Notifications.AssessmentReceiver;
+import com.example.studentscheduler.Notifications.CourseEndReceiver;
+import com.example.studentscheduler.Notifications.CourseStartReceiver;
 import com.example.studentscheduler.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SingleCourseDetailActivity extends AppCompatActivity {
     AppDatabase db;
@@ -40,7 +53,11 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
     List<Assessment> courseAssessment;
     List<Instructor> courseInstructor;
     List<Note> courseNotes;
-
+    Calendar cal = Calendar.getInstance();
+    private DatePickerDialog.OnDateSetListener startDateListener;
+    private DatePickerDialog.OnDateSetListener endDateListener;
+    private Button notifyStartButton;
+    private Button notifyEndButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +75,8 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         courseAssessmentsList = findViewById(R.id.singleCourseAssessmentListView);
         courseInstructorsList = findViewById(R.id.singleCourseInstructorView);
         courseNotesList = findViewById(R.id.singleCourseNotesListView);
+        notifyStartButton = findViewById(R.id.courseStartNotificationBtn);
+        notifyEndButton = findViewById(R.id.courseEndNotification);
 
         setCourseInfo();
         setCourseAssessmentList();
@@ -84,7 +103,62 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             noteIntent.putExtra("courseId", courseId);
             startActivity(noteIntent);
         });
+
+        notifyStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(SingleCourseDetailActivity.this, startDateListener,year, month, day).show();
+            }
+        });
+        startDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                cal.set(Calendar.YEAR,year);
+                cal.set(Calendar.MONTH,month);
+                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                String myformat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
+                Intent intent = new Intent(SingleCourseDetailActivity.this, CourseStartReceiver.class);
+                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                PendingIntent sender = PendingIntent.getBroadcast(SingleCourseDetailActivity.this,0,intent,0);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                long trigger = cal.getTimeInMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+            }
+        };
+
+        notifyEndButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(SingleCourseDetailActivity.this, endDateListener,year, month, day).show();
+            }
+        });
+        endDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                cal.set(Calendar.YEAR,year);
+                cal.set(Calendar.MONTH,month);
+                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                String myformat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
+                Intent intent = new Intent(SingleCourseDetailActivity.this, CourseEndReceiver.class);
+                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                PendingIntent sender = PendingIntent.getBroadcast(SingleCourseDetailActivity.this,0,intent,0);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                long trigger = cal.getTimeInMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+            }
+        };
     }
+
 
     private void setCourseInfo(){
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -140,11 +214,6 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             intent.putExtra("termId", termId);
             startActivity(intent);
 
-        }
-
-        if (optionId == R.id.notifyOption){
-
-        }
 
         if(optionId == R.id.deleteItem){
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleCourseDetailActivity.this);
@@ -162,7 +231,7 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             });
             builder.setNegativeButton("Cancel", null);
             builder.show();
-        }
+        }}
         return super.onOptionsItemSelected(item);
     }
 
@@ -190,4 +259,5 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

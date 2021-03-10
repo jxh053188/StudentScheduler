@@ -72,10 +72,6 @@ public class SingleInstructorDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption){
-
-        }
-
         if(optionId == R.id.deleteItem){
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleInstructorDetailActivity.this);
             builder.setTitle("Delete Instructor");

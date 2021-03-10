@@ -9,7 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
-        <activity android:name=".Activities.EditNoteActivity"></activity>
+        <receiver
+            android:name=".Notifications.TermEndReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver
+            android:name=".Notifications.TermStartReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".Notifications.CourseEndReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".Notifications.CourseStartReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".Activities.EditNoteActivity" />
         <activity android:name=".Activities.AddNoteActivity" />
         <activity android:name=".Activities.EditInstructorActivity" />
         <activity android:name=".Activities.AddInstructorActivity" />
@@ -21,7 +38,7 @@
         <receiver
             android:name=".Notifications.AssessmentReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".Activities.AddAssessmentActivity" />
         <activity

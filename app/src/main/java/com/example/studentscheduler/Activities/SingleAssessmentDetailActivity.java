@@ -127,10 +127,6 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
 
         }
 
-        if (optionId == R.id.notifyOption){
-
-        }
-
         if(optionId == R.id.deleteItem){
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleAssessmentDetailActivity.this);
             builder.setTitle("Delete Assessment");
