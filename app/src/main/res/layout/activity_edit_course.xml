@@ -7,31 +7,23 @@
     android:background="@drawable/cut_card_background"
     tools:context=".Activities.AddTermActivity">
 
-    <GridLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
-        android:columnCount="3"
-        android:rowCount="4">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/termsListHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
+            android:layout_width="380dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
-            app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam">
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -59,14 +51,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/termsListBox"
-            android:layout_width="wrap_content"
-            android:layout_height="350dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
+            android:layout_width="380dp"
+            android:layout_height="390dp"
+            android:layout_gravity="center"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
@@ -184,9 +171,7 @@
                         android:textColor="@color/black"/>
                 </LinearLayout>
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
-
-    </GridLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

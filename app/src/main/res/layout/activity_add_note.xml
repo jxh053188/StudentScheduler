@@ -7,6 +7,10 @@
     android:background="@drawable/cut_card_background"
     tools:context=".Activities.SingleNoteDetailActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,7 +18,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
-            android:layout_height="180dp"
+            android:layout_height="140dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
@@ -107,6 +111,5 @@
 
 
     </LinearLayout>
-
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

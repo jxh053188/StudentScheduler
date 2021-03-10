@@ -7,6 +7,10 @@
     android:background="@drawable/cut_card_background"
     tools:context=".Activities.AddAssessmentActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -135,5 +139,7 @@
         </ScrollView>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

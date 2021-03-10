@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cut_card_background"
-    tools:context=".Activities.AllInstructorsActivity">
-
+    tools:context=".Activities.AllTermsActivity">
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            
         <androidx.cardview.widget.CardView
-            android:id="@+id/instructorBoxHeader"
+            android:id="@+id/termsListHeader"
             android:layout_width="360dp"
             android:layout_height="140dp"
             android:layout_gravity="center"
@@ -37,12 +37,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_instructors" />
+                    android:src="@drawable/ic_term" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Instructors"
+                    android:text="Terms"
                     android:textColor="@color/colorBlack"
                     android:textSize="16dp" />
 
@@ -50,18 +50,27 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/instructorListBox"
-            android:layout_width="360dp"
-            android:layout_height="400dp"
+            android:id="@+id/termsListBox"
+            android:layout_width="380dp"
+            android:layout_height="480dp"
             android:layout_gravity="center"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            tools:ignore="ObsoleteLayoutParam">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="ExtraText">
+                
                 <ListView
-                    android:id="@+id/instructorListView"
-                    android:layout_width="320dp"
-                    android:layout_height="340dp"
+                    android:id="@+id/termListView"
+                    android:layout_width="324dp"
+                    android:layout_height="350dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"
@@ -74,6 +83,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.50" />
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/addTermButton"
+                    android:onClick="onAddTermButton"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:backgroundTint="#5BCBFF"
+                    app:icon="@drawable/ic_add"/>
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

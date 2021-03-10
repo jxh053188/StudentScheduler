@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cut_card_background"
-    tools:context=".Activities.SingleAssessmentDetailActivity">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    tools:context=".Activities.AddAssessmentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +14,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
-            android:layout_height="200dp"
+            android:layout_height="140dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
@@ -36,30 +32,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Detail"
+                    android:text="Add Assessment"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
 
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/onAssessmentNotificiation"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    app:backgroundTint="#FFFFFF"
-                    app:icon="@drawable/ic_notification"/>
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
-            android:layout_height="400dp"
+            android:layout_height="470dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
@@ -68,53 +57,104 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/assessmentDetailName"
+                    android:id="@+id/assessmentNameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assessment Name"
-                    android:textSize="20dp"
-                    android:paddingTop="50dp"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
 
+                <EditText
+                    android:id="@+id/assessmentNameInput"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
+
                 <TextView
-                    android:id="@+id/assessmentDetailType"
+                    android:id="@+id/assessmentTypeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assessment Type"
-                    android:textSize="20dp"
+                    android:textSize="16sp"
                     android:paddingTop="20dp"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
+                <Spinner
+                    android:id="@+id/assessmentTypeSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:outlineProvider="bounds"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
 
                 <TextView
-                    android:id="@+id/assessmentDetailDueDate"
+                    android:id="@+id/assessmentDueDateLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Due Date"
-                    android:textSize="20dp"
+                    android:textSize="16sp"
                     android:paddingTop="20dp"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
 
+
+                <EditText
+                    android:id="@+id/assessmentDateInput"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_gravity="center_horizontal"
+                    android:inputType="date"
+                    android:paddingTop="15dp"
+                    android:hint="mm/dd/yyyy"/>
+
                 <TextView
-                    android:id="@+id/assessmentDetailStatus"
+                    android:id="@+id/assessmentDStatusLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assessment Status"
-                    android:textSize="20dp"
+                    android:textSize="16sp"
                     android:paddingTop="20dp"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
+
+                <Spinner
+                    android:id="@+id/assessmentStatusSpinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:outlineProvider="bounds"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="15dp"/>
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/saveAssessmentButton"
+                    android:onClick="onSaveAssessment"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    app:backgroundTint="#5BCBFF"
+                    android:layout_gravity="center_horizontal"
+                    app:icon="@drawable/ic_baseline_save_24"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:text="Save"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        </ScrollView>
+
     </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

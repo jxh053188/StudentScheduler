@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/termsListHeader"
-            android:layout_width="380dp"
+            android:layout_width="400dp"
             android:layout_height="140dp"
             android:layout_gravity="center"
             app:cardCornerRadius="8dp"
@@ -37,12 +37,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_term" />
+                    android:src="@drawable/ic_course" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Update Term"
+                    android:text="Add Course"
                     android:textStyle="bold"
                     android:textColor="@color/colorBlack"
                     android:textSize="16dp" />
@@ -51,8 +51,9 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="380dp"
-            android:layout_height="390dp"
+            android:id="@+id/termsListBox"
+            android:layout_width="400dp"
+            android:layout_height="350dp"
             android:layout_gravity="center"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
@@ -61,11 +62,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="20dp"
-                tools:ignore="ExtraText">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,11 +74,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Term Name: "
+                        android:text="Course Name: "
                         android:textColor="@color/black"/>
 
                     <EditText
-                        android:id="@+id/editTermNameInput"
+                        android:id="@+id/courseNameInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -96,10 +95,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:text="Term Status: "/>
+                        android:text="Course Status: "/>
 
                     <Spinner
-                        android:id="@+id/editTermStatusSpinner"
+                        android:id="@+id/courseStatusSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:outlineProvider="bounds" />
@@ -118,7 +117,7 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/editTermStartDateInput"
+                        android:id="@+id/courseStartDateInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -140,7 +139,7 @@
                         android:textColor="@color/black" />
 
                     <EditText
-                        android:id="@+id/editTermEndDateInput"
+                        android:id="@+id/courseEndDateInput"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -156,7 +155,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="40dp">
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/updateTermButton"
+                        android:id="@+id/saveCourseButton"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="5dp"
@@ -175,7 +174,7 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

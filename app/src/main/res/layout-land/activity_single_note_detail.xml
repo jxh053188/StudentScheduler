@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cut_card_background"
-    tools:context=".Activities.SingleAssessmentDetailActivity">
-
+    tools:context=".Activities.SingleNoteDetailActivity">
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +18,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
@@ -30,30 +30,29 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_assessment"
+                    android:src="@drawable/ic_note"
                     android:layout_gravity="center_horizontal"
                     android:paddingTop="30dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Detail"
+                    android:text="Note Detail"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
-
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/onAssessmentNotificiation"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    app:backgroundTint="#FFFFFF"
-                    app:icon="@drawable/ic_notification"/>
-
             </LinearLayout>
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/noteShareButton"
+                android:onClick="onShareNote"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="50dp"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                app:backgroundTint="#FFFFFF"
+                android:layout_gravity="bottom"
+                app:icon="@drawable/ic_baseline_share_24"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -72,47 +71,32 @@
                 android:layout_gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/assessmentDetailName"
+                    android:id="@+id/noteDetailTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Name"
+                    android:text="Note Title"
+                    android:textStyle="bold"
                     android:textSize="20dp"
                     android:paddingTop="50dp"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
-                    android:id="@+id/assessmentDetailType"
+                    android:id="@+id/noteTextDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Type"
+                    android:text="Note Text"
                     android:textSize="20dp"
                     android:paddingTop="20dp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:id="@+id/assessmentDetailDueDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Due Date"
-                    android:textSize="20dp"
-                    android:paddingTop="20dp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                    android:id="@+id/assessmentDetailStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assessment Status"
-                    android:textSize="20dp"
-                    android:paddingTop="20dp"
+                    android:maxLines="5"
                     android:textColor="@color/black"
                     android:layout_gravity="center_horizontal"/>
 
             </LinearLayout>
+
+
         </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
     </ScrollView>

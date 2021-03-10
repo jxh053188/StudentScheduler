@@ -7,10 +7,6 @@
     android:background="@drawable/cut_card_background"
     tools:context=".Activities.AddAssessmentActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +14,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="380dp"
-            android:layout_height="180dp"
+            android:layout_height="140dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
@@ -36,7 +32,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Update Instructor"
+                    android:text="Add Instructor"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -75,7 +71,7 @@
                         android:layout_gravity="center_horizontal"/>
 
                     <EditText
-                        android:id="@+id/updateInstructorNameInput"
+                        android:id="@+id/instructorNameInput"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -90,7 +86,7 @@
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"/>
                     <EditText
-                        android:id="@+id/updateInstructorEmailInput"
+                        android:id="@+id/instructorEmailInput"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:outlineProvider="bounds"
@@ -108,7 +104,7 @@
 
 
                     <EditText
-                        android:id="@+id/updateInstructorPhoneInput"
+                        android:id="@+id/instructorPhoneInput"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -117,7 +113,7 @@
                         android:paddingTop="15dp" />
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/updateInstructorButton"
+                        android:id="@+id/saveInstructorButton"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="5dp"
                         android:layout_width="50dp"
@@ -139,6 +135,5 @@
         </ScrollView>
 
     </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
