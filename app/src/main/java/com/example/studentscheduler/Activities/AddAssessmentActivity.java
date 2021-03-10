@@ -2,6 +2,10 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,8 +25,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AddAssessmentActivity extends AppCompatActivity {
     private AppDatabase db;
@@ -37,7 +44,6 @@ public class AddAssessmentActivity extends AppCompatActivity {
     private int numAssessments;
     private List<Assessment> assessmentList;
     private int termId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +137,6 @@ public class AddAssessmentActivity extends AppCompatActivity {
         assessmentList = db.assessmentDao().getAssessmentList(courseId);
         numAssessments = assessmentList.size();
 
-
     }
 
     public void onSaveAssessment() throws ParseException {
@@ -161,4 +166,5 @@ public class AddAssessmentActivity extends AppCompatActivity {
             addSuccessful = true;
 
         }
-    }
+
+}

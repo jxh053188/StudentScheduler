@@ -19,9 +19,9 @@
         <activity android:name=".Activities.EditAssessmentActivity" />
 
         <receiver
-            android:name=".Activities.MyReceiver"
+            android:name=".Notifications.AssessmentReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"></receiver>
 
         <activity android:name=".Activities.AddAssessmentActivity" />
         <activity

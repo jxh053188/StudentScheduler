@@ -2,22 +2,31 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
-import com.example.studentscheduler.Entities.Instructor;
+import com.example.studentscheduler.Notifications.AssessmentReceiver;
 import com.example.studentscheduler.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class SingleAssessmentDetailActivity extends AppCompatActivity {
     AppDatabase db;
@@ -28,8 +37,10 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
     private TextView assessmentType;
     private TextView assessmentStatus;
     private TextView assessmentDueDate;
-
-
+    private DatePickerDialog.OnDateSetListener dateListener;
+    Button notificationButton;
+    private final Calendar cal = Calendar.getInstance();
+    private TextView dateMilli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +55,41 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         assessmentStatus = findViewById(R.id.assessmentDetailStatus);
         assessmentDueDate = findViewById(R.id.assessmentDetailDueDate);
         courseId = intent.getIntExtra("courseId" ,-1);
+        notificationButton = findViewById(R.id.onAssessmentNotificiation);
+        //dateMilli = findViewById(R.id.assessmentAlertDate);
 
         setAssessmentInfo();
+
+        notificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(SingleAssessmentDetailActivity.this, dateListener,year, month, day).show();
+            }
+        });
+        dateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                cal.set(Calendar.YEAR,year);
+                cal.set(Calendar.MONTH,month);
+                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                String myformat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
+                Intent intent = new Intent(SingleAssessmentDetailActivity.this, AssessmentReceiver.class);
+                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                PendingIntent sender = PendingIntent.getBroadcast(SingleAssessmentDetailActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                long trigger = cal.getTimeInMillis();
+                alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+            }
+        };
+
+
+
+
     }
 
     private void setAssessmentInfo(){
@@ -107,4 +151,5 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

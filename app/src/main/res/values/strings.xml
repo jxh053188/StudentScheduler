@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">StudentScheduler</string>
+    <string name="channel_name">NotificationChannel</string>
+    <string name="channel_description">Allows notifications to be sent from the schedule app.</string>
+    <string name="assessment_title">Assessment Goal Today!</string>
+    <string name="assessment_text">You have an assessment today! Check the Student Scheduler for more information.</string>
+    <string name="course_start_title">A new course starts today!</string>
+    <string name="course_start_text">You have a new course today! Check the Student Scheduler for more information.</string>
+    <string name="course_end_title">Your course ends today!</string>
+    <string name="course_end_text">Your course is ending today! Check the Student Scheduler for more information.</string>
+    <string name="term_start_title">A new term starts today!</string>
+    <string name="term_start_text">You have a term course today! Check the Student Scheduler for more information.</string>
+    <string name="term_end_title">Your term ends today!</string>
+    <string name="term_end_text">Your term is ending today! Check the Student Scheduler for more information.</string>
 </resources>
