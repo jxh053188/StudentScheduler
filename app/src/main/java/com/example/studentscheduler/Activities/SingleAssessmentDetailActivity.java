@@ -80,7 +80,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
                 Intent intent = new Intent(SingleAssessmentDetailActivity.this, AssessmentReceiver.class);
                 intent.putExtra("assessment", sdf.format(cal.getTime()));
-                PendingIntent sender = PendingIntent.getBroadcast(SingleAssessmentDetailActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent sender = PendingIntent.getBroadcast(SingleAssessmentDetailActivity.this,0,intent,0);
                 AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 long trigger = cal.getTimeInMillis();
                 alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);

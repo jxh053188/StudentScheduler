@@ -54,6 +54,7 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
     List<Instructor> courseInstructor;
     List<Note> courseNotes;
     Calendar cal = Calendar.getInstance();
+    Calendar cal2 = Calendar.getInstance();
     private DatePickerDialog.OnDateSetListener startDateListener;
     private DatePickerDialog.OnDateSetListener endDateListener;
     private Button notifyStartButton;
@@ -135,25 +136,25 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+                int year = cal2.get(Calendar.YEAR);
+                int month = cal2.get(Calendar.MONTH);
+                int day = cal2.get(Calendar.DAY_OF_MONTH);
                 new DatePickerDialog(SingleCourseDetailActivity.this, endDateListener,year, month, day).show();
             }
         });
         endDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                cal.set(Calendar.YEAR,year);
-                cal.set(Calendar.MONTH,month);
-                cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                cal2.set(Calendar.YEAR,year);
+                cal2.set(Calendar.MONTH,month);
+                cal2.set(Calendar.DAY_OF_MONTH,dayOfMonth);
                 String myformat = "MM/dd/yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myformat, Locale.US);
                 Intent intent = new Intent(SingleCourseDetailActivity.this, CourseEndReceiver.class);
-                intent.putExtra("assessment", sdf.format(cal.getTime()));
+                intent.putExtra("assessment", sdf.format(cal2.getTime()));
                 PendingIntent sender = PendingIntent.getBroadcast(SingleCourseDetailActivity.this,0,intent,0);
                 AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                long trigger = cal.getTimeInMillis();
+                long trigger = cal2.getTimeInMillis();
                 alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
             }
         };
