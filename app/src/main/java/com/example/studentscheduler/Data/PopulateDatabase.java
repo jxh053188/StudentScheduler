@@ -63,6 +63,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempTerm1.setTerm_name("Spring 2021");
         tempTerm1.setTerm_start(start.getTime());
         tempTerm1.setTerm_end(end.getTime());
+        tempTerm1.setTerm_status("In Progress");
 
         start = Calendar.getInstance();
         end = Calendar.getInstance();
@@ -71,6 +72,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempTerm2.setTerm_name("Fall 2021");
         tempTerm2.setTerm_start(start.getTime());
         tempTerm2.setTerm_end(end.getTime());
+        tempTerm2.setTerm_status("Pending");
 
         start = Calendar.getInstance();
         end = Calendar.getInstance();
@@ -79,6 +81,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempTerm3.setTerm_name("Spring 2022");
         tempTerm3.setTerm_start(start.getTime());
         tempTerm3.setTerm_end(end.getTime());
+        tempTerm3.setTerm_status("Pending");
 
         db.termDao().insertAll(tempTerm1, tempTerm2, tempTerm3);
 
@@ -134,7 +137,17 @@ public class PopulateDatabase extends AppCompatActivity {
         tempInstructor1.setInstructor_phone("555-555-5458");
         tempInstructor1.setCourse_id_fk(CourseList.get(0).getCourse_id());
 
-        db.instructorDao().insertInstructor(tempInstructor1);
+        tempInstructor2.setInstructor_name("Master Yoda");
+        tempInstructor2.setInstructor_phone("555-555-5555");
+        tempInstructor2.setInstructor_email("yoda@jediorder.com");
+        tempInstructor2.setCourse_id_fk(CourseList.get(1).getCourse_id());
+
+        tempInstructor3.setInstructor_name("Luke Skywalker");
+        tempInstructor3.setInstructor_phone("555-458-5921");
+        tempInstructor3.setInstructor_email("luke@jediorder.com");
+        tempInstructor3.setCourse_id_fk(CourseList.get(2).getCourse_id());
+
+        db.instructorDao().insertAllInstructors(tempInstructor1, tempInstructor2, tempInstructor3);
     }
 
     private void insertAssessments() {
@@ -150,21 +163,49 @@ public class PopulateDatabase extends AppCompatActivity {
         end.add(Calendar.MONTH, -1);
         tempAssessment1.setAssessment_name("Fall of the Sith");
         tempAssessment1.setAssessment_due_date(start.getTime());
-        tempAssessment1.setAssessment_type("Objective");
+        tempAssessment1.setAssessment_type("Objective Assessment");
         tempAssessment1.setCourse_id_fk(CourseList.get(0).getCourse_id());
         tempAssessment1.setAssessment_status("Pending");
 
-        db.assessmentDao().insertAllAssessments(tempAssessment1);
+        start = Calendar.getInstance();
+        end = Calendar.getInstance();
+        start.add(Calendar.MONTH, -1);
+        end.add(Calendar.MONTH, 1);
+        tempAssessment2.setAssessment_name("Ewok Culture");
+        tempAssessment2.setAssessment_due_date(start.getTime());
+        tempAssessment2.setAssessment_type("Performance Assessment");
+        tempAssessment2.setCourse_id_fk(CourseList.get(1).getCourse_id());
+        tempAssessment2.setAssessment_status("Passed");
+
+        start = Calendar.getInstance();
+        end = Calendar.getInstance();
+        start.add(Calendar.MONTH, 2);
+        end.add(Calendar.MONTH, 3);
+        tempAssessment3.setAssessment_name("Lightsaber Engineering");
+        tempAssessment3.setAssessment_due_date(start.getTime());
+        tempAssessment3.setAssessment_type("Objective");
+        tempAssessment3.setCourse_id_fk(CourseList.get(2).getCourse_id());
+        tempAssessment3.setAssessment_status("Failed");
+
+        db.assessmentDao().insertAllAssessments(tempAssessment1, tempAssessment2, tempAssessment3);
     }
 
     private void insertNotes() {
         List<Term> TermList = db.termDao().getTermList();
         List<Course> CourseList = db.courseDao().getCourseList(TermList.get(0).getTerm_id());
 
-        tempNote1.setNote_title("I am a note");
-        tempNote1.setNote_text("This is a very fun note about my course");
+        tempNote1.setNote_title("A new hope?");
+        tempNote1.setNote_text("This class is boring. You'd think a bunch of magical space knights would be more interesting.");
         tempNote1.setCourse_id_fk(CourseList.get(0).getCourse_id());
 
-        db.noteDao().insertNote(tempNote1);
+        tempNote1.setNote_title("Carrie");
+        tempNote1.setNote_text("I can move stuff with my mind...like Carrie.");
+        tempNote1.setCourse_id_fk(CourseList.get(1).getCourse_id());
+
+        tempNote1.setNote_title("Failed Exam");
+        tempNote1.setNote_text("Will I ever be a real jedi?");
+        tempNote1.setCourse_id_fk(CourseList.get(2).getCourse_id());
+
+        db.noteDao().insertAllNotes(tempNote1, tempNote2, tempNote3);
     }
 }

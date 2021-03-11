@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -91,36 +93,28 @@ public class AddCourseActivity extends AppCompatActivity {
         Date startDate = sdf.parse(start);
         Date endDate = sdf.parse(end);
 
-        if (name.trim().isEmpty()) {
-            Toast.makeText(this, "Please enter a term name", Toast.LENGTH_SHORT).show();
-            return null;
+        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() || startDate.after(endDate)) {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddCourseActivity.this);
+            builder.setTitle("Error");
+            builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            builder.show();
+        } else {
+            Course course = new Course();
+            course.setCourse_name(name);
+            course.setCourse_status(selectedStatus);
+            course.setCourse_start(startDate);
+            course.setCourse_end(endDate);
+            course.setTerm_id_fk(termId);
+            db.courseDao().insertCourse(course);
+            Toast.makeText(this, "Course added", Toast.LENGTH_SHORT).show();
+            addSuccessful = true;
         }
-
-        assert startDate != null;
-        if (startDate.after(endDate)) {
-            Toast.makeText(this, "Dates are invalid", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        if (start.trim().isEmpty()) {
-            Toast.makeText(this, "Please enter a start date", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        if (end.trim().isEmpty()) {
-            Toast.makeText(this, "Please enter an end date", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        Course course = new Course();
-        course.setCourse_name(name);
-        course.setCourse_status(selectedStatus);
-        course.setCourse_start(startDate);
-        course.setCourse_end(endDate);
-        course.setTerm_id_fk(termId);
-        db.courseDao().insertCourse(course);
-        Toast.makeText(this,"Course added",Toast.LENGTH_SHORT).show();
-        addSuccessful = true;
-
-        return course;
+            return course;
     }
 }

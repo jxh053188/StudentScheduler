@@ -21,11 +21,10 @@
     <GridLayout
         android:id="@+id/navGrid"
         android:layout_width="391dp"
-        android:layout_height="130dp"
+        android:layout_height="112dp"
         android:layout_below="@id/textView"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="5dp"
