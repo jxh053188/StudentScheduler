@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StudentScheduler</string>
+    <string name="app_name">Student Schedule Helper</string>
     <string name="assessment_channel">Assessment Notifications </string>
     <string name="assessment_channel_description">Allows assessment notifications to be sent from the schedule app.</string>
     <string name="assessment_title">Assessment Goal Today!</string>

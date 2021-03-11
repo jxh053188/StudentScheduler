@@ -26,14 +26,22 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activities.EditNoteActivity" />
-        <activity android:name=".Activities.AddNoteActivity" />
-        <activity android:name=".Activities.EditInstructorActivity" />
-        <activity android:name=".Activities.AddInstructorActivity" />
-        <activity android:name=".Activities.AddCourseActivity" />
-        <activity android:name=".Activities.EditTermActivity" />
-        <activity android:name=".Activities.EditCourseActivity" />
-        <activity android:name=".Activities.EditAssessmentActivity" />
+        <activity android:name=".Activities.EditNoteActivity"
+            android:label="Edit Note"/>
+        <activity android:name=".Activities.AddNoteActivity"
+            android:label="Add Note"/>
+        <activity android:name=".Activities.EditInstructorActivity"
+            android:label="Edit Instructor"/>
+        <activity android:name=".Activities.AddInstructorActivity"
+            android:label="Add Instructor"/>
+        <activity android:name=".Activities.AddCourseActivity"
+            android:label="Add Course"/>
+        <activity android:name=".Activities.EditTermActivity"
+            android:label="Edit Term"/>
+        <activity android:name=".Activities.EditCourseActivity"
+            android:label="Edit Course"/>
+        <activity android:name=".Activities.EditAssessmentActivity"
+            android:label="Edit Assessment"/>
 
         <receiver
             android:name=".Notifications.AssessmentReceiver"
