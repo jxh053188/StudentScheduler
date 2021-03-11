@@ -18,9 +18,6 @@ public interface InstructorDao {
     @Query("SELECT * FROM instructor_table WHERE course_id_fk = :courseID ORDER BY instructor_id")
     List<Instructor> getInstructorList(int courseID);
 
-    @Query("SELECT * FROM instructor_table WHERE course_id_fk = :courseID AND instructor_id = :mentorID")
-    Instructor getInstructor(int courseID, int mentorID);
-
     @Query("SELECT * FROM instructor_table WHERE instructor_id = :instructorId")
     Instructor getInstructorDetail(int instructorId);
 

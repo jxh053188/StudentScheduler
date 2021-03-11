@@ -117,6 +117,18 @@ public class AddAssessmentActivity extends AppCompatActivity {
                             }
                         });
                         builder.show();
+                } else if (assessmentDate.getText().toString().isEmpty() ||
+                        assessmentName.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddAssessmentActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
                 } else {
                     try {
                         onSaveAssessment();
@@ -146,15 +158,6 @@ public class AddAssessmentActivity extends AppCompatActivity {
             String date = assessmentDate.getText().toString();
             Date dueDate = format.parse(date);
 
-            if (aName.trim().isEmpty()) {
-                Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
-            }
-
-            if (date.trim().isEmpty()) {
-                Toast.makeText(this, "Date cannot be empty", Toast.LENGTH_SHORT).show();
-            }
-
-
             Assessment assessment = new Assessment();
             assessment.setAssessment_name(aName);
             assessment.setAssessment_status(selectedStatus);
@@ -164,7 +167,6 @@ public class AddAssessmentActivity extends AppCompatActivity {
             db.assessmentDao().insertAssessment(assessment);
             Toast.makeText(this, "New Assessment is saved", Toast.LENGTH_SHORT).show();
             addSuccessful = true;
-
         }
 
 }

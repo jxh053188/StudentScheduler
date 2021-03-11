@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -41,17 +43,30 @@ public class EditNoteActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    note = onUpdateNote();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (updateSuccessful = true) {
-                    Intent intent = new Intent(getApplicationContext(), SingleNoteDetailActivity.class);
-                    intent.putExtra("noteId", noteId);
-                    intent.putExtra("courseId", courseId);
-                    startActivity(intent);
-                    finish();
+                if (noteTitle.getText().toString().isEmpty() || noteText.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EditNoteActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        note = onUpdateNote();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (updateSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleNoteDetailActivity.class);
+                        intent.putExtra("noteId", noteId);
+                        intent.putExtra("courseId", courseId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
@@ -70,11 +85,6 @@ public class EditNoteActivity extends AppCompatActivity {
     private Note onUpdateNote(){
         String title = noteTitle.getText().toString();
         String text = noteText.getText().toString();
-
-        if(title.trim().isEmpty() || text.trim().isEmpty()){
-            Toast.makeText(this, "Please enter all fields",Toast.LENGTH_SHORT).show();
-            return null;
-        }
 
         Note note = new Note();
         note.setNote_id(noteId);

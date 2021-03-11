@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class EditInstructorActivity extends AppCompatActivity {
 
@@ -41,16 +43,30 @@ public class EditInstructorActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    instructor = onUpdateInstructor();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), SingleInstructorDetailActivity.class);
-                    intent.putExtra("instructorId", instructorId);
-                    intent.putExtra("courseId", courseId);
-                    startActivity(intent);
-                    finish();
+                if (instructorName.getText().toString().isEmpty() || instructorEmail.getText().toString().isEmpty() || instructorPhone.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EditInstructorActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        instructor = onUpdateInstructor();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (updateSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleInstructorDetailActivity.class);
+                        intent.putExtra("instructorId", instructorId);
+                        intent.putExtra("courseId", courseId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
@@ -72,11 +88,6 @@ public class EditInstructorActivity extends AppCompatActivity {
         String name = instructorName.getText().toString();
         String email = instructorEmail.getText().toString();
         String phone = instructorPhone.getText().toString();
-
-        if(name.trim().isEmpty() || email.trim().isEmpty() || phone.trim().isEmpty()){
-            Toast.makeText(this, "Please enter all fields",Toast.LENGTH_SHORT).show();
-            return null;
-        }
 
         Instructor instructor = new Instructor();
         instructor.setInstructor_id(instructorId);

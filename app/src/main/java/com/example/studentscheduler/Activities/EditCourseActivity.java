@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,16 +73,30 @@ public class EditCourseActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    course = onUpdateCourse();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
-                    intent.putExtra("courseId", courseId);
-                    intent.putExtra("termId", termId);
-                    startActivity(intent);
-                    finish();
+                if (courseName.getText().toString().isEmpty() || courseStart.getText().toString().isEmpty() || courseEnd.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EditCourseActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        course = onUpdateCourse();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (updateSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleCourseDetailActivity.class);
+                        intent.putExtra("courseId", courseId);
+                        intent.putExtra("termId", termId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });

@@ -209,12 +209,12 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int optionId = item.getItemId();
 
-        if(optionId == R.id.editItem){
-            Intent intent = new Intent(getApplicationContext(),EditCourseActivity.class);
+        if(optionId == R.id.editItem) {
+            Intent intent = new Intent(getApplicationContext(), EditCourseActivity.class);
             intent.putExtra("courseId", courseId);
             intent.putExtra("termId", termId);
             startActivity(intent);
-
+        }
 
         if(optionId == R.id.deleteItem){
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(SingleCourseDetailActivity.this);
@@ -232,7 +232,7 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
             });
             builder.setNegativeButton("Cancel", null);
             builder.show();
-        }}
+        }
         return super.onOptionsItemSelected(item);
     }
 

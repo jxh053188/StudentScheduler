@@ -33,17 +33,14 @@ import static androidx.room.ForeignKey.CASCADE;
         private Date course_end;
         @ColumnInfo(name = "course_status")
         private String course_status;
-        @ColumnInfo(name = "course_alert_date")
-        private Date course_alert_date;
 
-        public Course(int course_id, int term_id_fk, String course_name, Date course_start, Date course_end, String course_status, Date course_alert_date) {
+        public Course(int course_id, int term_id_fk, String course_name, Date course_start, Date course_end, String course_status) {
             this.course_id = course_id;
             this.term_id_fk = term_id_fk;
             this.course_name = course_name;
             this.course_start = course_start;
             this.course_end = course_end;
             this.course_status = course_status;
-            this.course_alert_date = course_alert_date;
         }
 
         public Course() {
@@ -96,14 +93,6 @@ import static androidx.room.ForeignKey.CASCADE;
 
         public void setCourse_status(String course_status) {
             this.course_status = course_status;
-        }
-
-        public Date getCourse_alert_date() {
-            return course_alert_date;
-        }
-
-        public void setCourse_alert_date(Date course_alert_date) {
-            this.course_alert_date = course_alert_date;
         }
 
         @Override

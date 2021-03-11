@@ -49,7 +49,7 @@ public class AddCourseActivity extends AppCompatActivity {
         String[] courseSpinner = new String[]{
                 "In Progress", "Completed", "Dropped", "Plan To Take"
         };
-         //Set status spinner options
+        //Set status spinner options
         courseStatus = findViewById(R.id.courseStatusSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, courseSpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,21 +71,35 @@ public class AddCourseActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    course = onSaveCourse();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), SingleTermDetailActivity.class);
-                    intent.putExtra("termId", termId);
-                    startActivity(intent);
-                    finish();
+                if (courseName.getText().toString().isEmpty() || courseStart.getText().toString().isEmpty() || courseEnd.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddCourseActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        onSaveCourse();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (addSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleTermDetailActivity.class);
+                        intent.putExtra("termId", termId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
     }
 
-    public Course onSaveCourse() throws ParseException {
+    public void onSaveCourse() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         String name = courseName.getText().toString();
         String start = courseStart.getText().toString();
@@ -93,18 +107,6 @@ public class AddCourseActivity extends AppCompatActivity {
         Date startDate = sdf.parse(start);
         Date endDate = sdf.parse(end);
 
-        if (name.trim().isEmpty() || start.trim().isEmpty() || end.trim().isEmpty() || startDate.after(endDate)) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddCourseActivity.this);
-            builder.setTitle("Error");
-            builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            builder.show();
-        } else {
             Course course = new Course();
             course.setCourse_name(name);
             course.setCourse_status(selectedStatus);
@@ -115,6 +117,4 @@ public class AddCourseActivity extends AppCompatActivity {
             Toast.makeText(this, "Course added", Toast.LENGTH_SHORT).show();
             addSuccessful = true;
         }
-            return course;
     }
-}

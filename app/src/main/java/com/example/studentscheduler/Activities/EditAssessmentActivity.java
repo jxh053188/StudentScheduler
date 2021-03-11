@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,16 +102,31 @@ public class EditAssessmentActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    assessment = onUpdateAssessment();
-                } catch (ParseException e){
-                    e.printStackTrace();
-                } if (updateSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), SingleAssessmentDetailActivity.class);
-                    intent.putExtra("courseId", courseId);
-                    intent.putExtra("assessmentId", assessmentId);
-                    startActivity(intent);
-                    finish();
+                if (assessmentName.getText().toString().isEmpty() ||
+                        assessmentDate.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EditAssessmentActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        assessment = onUpdateAssessment();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (updateSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), SingleAssessmentDetailActivity.class);
+                        intent.putExtra("courseId", courseId);
+                        intent.putExtra("assessmentId", assessmentId);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });

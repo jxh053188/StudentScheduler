@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.studentscheduler.Data.AppDatabase;
 import com.example.studentscheduler.Entities.Term;
 import com.example.studentscheduler.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,14 +66,28 @@ public class AddTermActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    term = onSaveTerm();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }if (addSuccessful = true){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                if (termNameInput.getText().toString().isEmpty() || termStartDateInput.getText().toString().isEmpty() || termEndDateInput.getText().toString().isEmpty()) {
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(AddTermActivity.this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Please fill in all fields and check \n that start date is before end date.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else {
+                    try {
+                        term = onSaveTerm();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (addSuccessful = true) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
@@ -85,25 +101,6 @@ public class AddTermActivity extends AppCompatActivity {
         String endDate = termEndDateInput.getText().toString();
         Date startDateDate = format.parse(startDate);
         Date endDateDate = format.parse(endDate);
-
-        if(termName.trim().isEmpty()){
-            Toast.makeText(this, "Please enter a term name",Toast.LENGTH_SHORT).show();
-        }
-
-        assert startDateDate != null;
-        if(startDateDate.after(endDateDate)){
-            Toast.makeText(this,"Dates are invalid", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-
-        if(startDate.trim().isEmpty()){
-            Toast.makeText(this,"Please enter a start date", Toast.LENGTH_SHORT).show();
-            return null;
-        }
-        if(endDate.trim().isEmpty()){
-            Toast.makeText(this,"Please enter an end date", Toast.LENGTH_SHORT).show();
-            return null;
-        }
 
         Term term = new Term();
         term.setTerm_name(termName);
