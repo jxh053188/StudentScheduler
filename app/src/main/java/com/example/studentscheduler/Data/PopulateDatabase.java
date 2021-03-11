@@ -198,13 +198,13 @@ public class PopulateDatabase extends AppCompatActivity {
         tempNote1.setNote_text("This class is boring. You'd think a bunch of magical space knights would be more interesting.");
         tempNote1.setCourse_id_fk(CourseList.get(0).getCourse_id());
 
-        tempNote1.setNote_title("Carrie");
-        tempNote1.setNote_text("I can move stuff with my mind...like Carrie.");
-        tempNote1.setCourse_id_fk(CourseList.get(1).getCourse_id());
+        tempNote2.setNote_title("Carrie");
+        tempNote2.setNote_text("I can move stuff with my mind...like Carrie.");
+        tempNote2.setCourse_id_fk(CourseList.get(1).getCourse_id());
 
-        tempNote1.setNote_title("Failed Exam");
-        tempNote1.setNote_text("Will I ever be a real jedi?");
-        tempNote1.setCourse_id_fk(CourseList.get(2).getCourse_id());
+        tempNote3.setNote_title("Failed Exam");
+        tempNote3.setNote_text("Will I ever be a real jedi?");
+        tempNote3.setCourse_id_fk(CourseList.get(2).getCourse_id());
 
         db.noteDao().insertAllNotes(tempNote1, tempNote2, tempNote3);
     }

@@ -91,7 +91,9 @@
                         android:layout_height="wrap_content"
                         android:outlineProvider="bounds"
                         android:layout_gravity="center_horizontal"
-                        android:paddingTop="15dp"/>
+                        android:paddingTop="15dp"
+                        android:inputType="textEmailAddress"
+                        android:hint="email@domain.com"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -109,8 +111,9 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:layout_gravity="center_horizontal"
-                        android:inputType="number"
-                        android:paddingTop="15dp" />
+                        android:inputType="phone"
+                        android:paddingTop="15dp"
+                        android:hint="555-555-5555"/>
 
                     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                         android:id="@+id/saveInstructorButton"
