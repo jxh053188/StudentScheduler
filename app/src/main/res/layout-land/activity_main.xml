@@ -45,7 +45,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam">
+            tools:ignore="ObsoleteLayoutParam"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,7 +85,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam">
+            tools:ignore="ObsoleteLayoutParam"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -141,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Terms"
+                    android:text="Term Details"
                     android:textColor="@color/colorBlack"
                     android:textSize="16dp" />
 
