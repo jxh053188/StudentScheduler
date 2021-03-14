@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
+        <activity android:name=".Activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".Notifications.TermEndReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".Notifications.TermStartReceiver"
             android:enabled="true"
@@ -26,22 +33,30 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activities.EditNoteActivity"
-            android:label="Edit Note"/>
-        <activity android:name=".Activities.AddNoteActivity"
-            android:label="Add Note"/>
-        <activity android:name=".Activities.EditInstructorActivity"
-            android:label="Edit Instructor"/>
-        <activity android:name=".Activities.AddInstructorActivity"
-            android:label="Add Instructor"/>
-        <activity android:name=".Activities.AddCourseActivity"
-            android:label="Add Course"/>
-        <activity android:name=".Activities.EditTermActivity"
-            android:label="Edit Term"/>
-        <activity android:name=".Activities.EditCourseActivity"
-            android:label="Edit Course"/>
-        <activity android:name=".Activities.EditAssessmentActivity"
-            android:label="Edit Assessment"/>
+        <activity
+            android:name=".Activities.EditNoteActivity"
+            android:label="Edit Note" />
+        <activity
+            android:name=".Activities.AddNoteActivity"
+            android:label="Add Note" />
+        <activity
+            android:name=".Activities.EditInstructorActivity"
+            android:label="Edit Instructor" />
+        <activity
+            android:name=".Activities.AddInstructorActivity"
+            android:label="Add Instructor" />
+        <activity
+            android:name=".Activities.AddCourseActivity"
+            android:label="Add Course" />
+        <activity
+            android:name=".Activities.EditTermActivity"
+            android:label="Edit Term" />
+        <activity
+            android:name=".Activities.EditCourseActivity"
+            android:label="Edit Course" />
+        <activity
+            android:name=".Activities.EditAssessmentActivity"
+            android:label="Edit Assessment" />
 
         <receiver
             android:name=".Notifications.AssessmentReceiver"
@@ -58,7 +73,7 @@
         <activity
             android:name=".Activities.SingleInstructorDetailActivity"
             android:label="Instructor Details"
-            android:parentActivityName=".Activities.AllInstructorsActivity" />
+            android:parentActivityName=".Activities.AllAssessmentsActivity" />
         <activity
             android:name=".Activities.SingleCourseDetailActivity"
             android:label="Course Details"
@@ -72,8 +87,8 @@
             android:label="Add New Term"
             android:parentActivityName=".Activities.AllTermsActivity" />
         <activity
-            android:name=".Activities.AllInstructorsActivity"
-            android:label="Instructors List"
+            android:name=".Activities.AllAssessmentsActivity"
+            android:label="Assessments List"
             android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.AllCoursesActivity"
@@ -83,13 +98,8 @@
             android:name=".Activities.AllTermsActivity"
             android:label="Terms List"
             android:parentActivityName=".Activities.MainActivity" />
-        <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Activities.MainActivity"
+            android:label="Student Dashboard"></activity>
     </application>
 
 </manifest>

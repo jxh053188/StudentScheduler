@@ -12,13 +12,15 @@ import com.example.studentscheduler.DAO.CourseDao;
 import com.example.studentscheduler.DAO.InstructorDao;
 import com.example.studentscheduler.DAO.NoteDao;
 import com.example.studentscheduler.DAO.TermDao;
+import com.example.studentscheduler.DAO.UserDao;
 import com.example.studentscheduler.Entities.Assessment;
 import com.example.studentscheduler.Entities.Course;
 import com.example.studentscheduler.Entities.Instructor;
 import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.Entities.Term;
+import com.example.studentscheduler.Entities.User;
 
-@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class, Note.class}, exportSchema = false, version = 4)
+@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class, Note.class, User.class}, exportSchema = false, version = 5)
 @TypeConverters({Converters.class})
 
 public abstract class AppDatabase extends RoomDatabase {
@@ -38,6 +40,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract AssessmentDao assessmentDao();
     public abstract InstructorDao instructorDao();
     public abstract NoteDao noteDao();
+    public abstract UserDao userDao();
 
 }
 

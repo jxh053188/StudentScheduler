@@ -2,6 +2,7 @@ package com.example.studentscheduler.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,6 +26,13 @@ public class AllCoursesActivity extends AppCompatActivity {
         db = AppDatabase.getInstance(getApplicationContext());
         allCoursesList = findViewById(R.id.allCoursesListView);
         updateAllCoursesList();
+
+        allCoursesList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent assessmentIntent = new Intent(AllCoursesActivity.this, SingleCourseDetailActivity.class);
+            assessmentIntent.putExtra("courseId", allCourses.get(position).getCourse_id());
+            assessmentIntent.putExtra("termId",allCourses.get(position).getTerm_id_fk());
+            startActivity(assessmentIntent);
+        });
     }
 
     private void updateAllCoursesList(){

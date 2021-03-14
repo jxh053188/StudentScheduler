@@ -67,11 +67,20 @@
                 android:orientation="vertical"
                 tools:ignore="ExtraText">
 
+                <EditText
+                    android:id="@+id/courseSearchInput"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Course Search"
+                    android:layout_gravity="left"/>
+
+
 
                 <ListView
                     android:id="@+id/allCoursesListView"
                     android:layout_width="320dp"
-                    android:layout_height="320dp"
+                    android:layout_height="260dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"

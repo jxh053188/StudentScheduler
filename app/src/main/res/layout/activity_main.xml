@@ -44,8 +44,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam"
-            android:visibility="gone">
+            tools:ignore="ObsoleteLayoutParam">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,8 +83,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam"
-            android:visibility="gone">
+            tools:ignore="ObsoleteLayoutParam">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -98,12 +96,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_instructors" />
+                    android:src="@drawable/ic_assessment" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Instructors"
+                    android:text="Assessments"
                     android:textColor="@color/colorBlack"
                     android:textSize="16dp" />
 

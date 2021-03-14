@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onInstructorsList(View view) {
-        Intent intent = new Intent(MainActivity.this, AllInstructorsActivity.class);
+        Intent intent = new Intent(MainActivity.this, AllAssessmentsActivity.class);
         startActivity(intent);
     }
 
