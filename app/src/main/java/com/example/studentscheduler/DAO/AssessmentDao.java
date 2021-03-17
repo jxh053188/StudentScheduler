@@ -21,6 +21,9 @@ public interface AssessmentDao {
     @Query("SELECT * FROM assessment_table")
     List<Assessment> getAllAssessments();
 
+    @Query("SELECT AVG(assessment_score) FROM assessment_table WHERE (assessment_status = 'Passed' OR assessment_status = 'Failed') AND course_id_fk = :courseID")
+    int assessmentAvg (int courseID);
+
     @Insert
     void insertAssessment(Assessment assessment);
 

@@ -166,6 +166,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempAssessment1.setAssessment_type("Objective Assessment");
         tempAssessment1.setCourse_id_fk(CourseList.get(0).getCourse_id());
         tempAssessment1.setAssessment_status("Pending");
+        tempAssessment1.setAssessment_score(0);
 
         start = Calendar.getInstance();
         end = Calendar.getInstance();
@@ -176,6 +177,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempAssessment2.setAssessment_type("Performance Assessment");
         tempAssessment2.setCourse_id_fk(CourseList.get(1).getCourse_id());
         tempAssessment2.setAssessment_status("Passed");
+        tempAssessment2.setAssessment_score(87);
 
         start = Calendar.getInstance();
         end = Calendar.getInstance();
@@ -186,6 +188,7 @@ public class PopulateDatabase extends AppCompatActivity {
         tempAssessment3.setAssessment_type("Objective");
         tempAssessment3.setCourse_id_fk(CourseList.get(2).getCourse_id());
         tempAssessment3.setAssessment_status("Failed");
+        tempAssessment3.setAssessment_score(45);
 
         db.assessmentDao().insertAllAssessments(tempAssessment1, tempAssessment2, tempAssessment3);
     }

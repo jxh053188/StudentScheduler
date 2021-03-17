@@ -134,7 +134,29 @@
                     android:layout_height="wrap_content"
                     android:outlineProvider="bounds"
                     android:layout_gravity="center_horizontal"
-                    android:paddingTop="15dp"/>
+                    android:paddingTop="15dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/editAssessmentGradeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grade"
+                    android:textSize="16sp"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+
+                <EditText
+                    android:id="@+id/editAssessmentGrade"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_gravity="center_horizontal"
+                    android:inputType="number"
+                    android:paddingTop="15dp"
+                    android:hint= "Grade Percent %"/>
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/editAssessmentButton"

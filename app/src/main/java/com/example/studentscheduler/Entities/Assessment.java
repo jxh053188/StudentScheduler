@@ -28,14 +28,17 @@ import static androidx.room.ForeignKey.CASCADE;
         private String assessment_status;
         @ColumnInfo(name = "assessment_due_date")
         private Date assessment_due_date;
+        @ColumnInfo(name = "assessment_score")
+        private int assessment_score;
 
-        public Assessment(int assessment_Id, int course_id_fk, String assessment_name, String assessment_type, String assessment_status, Date assessment_due_date) {
+        public Assessment(int assessment_Id, int course_id_fk, String assessment_name, String assessment_type, String assessment_status, Date assessment_due_date, int assessment_score) {
             this.assessment_Id = assessment_Id;
             this.course_id_fk = course_id_fk;
             this.assessment_name = assessment_name;
             this.assessment_type = assessment_type;
             this.assessment_status = assessment_status;
             this.assessment_due_date = assessment_due_date;
+            this.assessment_score = assessment_score;
         }
 
         public Assessment() {
@@ -88,6 +91,14 @@ import static androidx.room.ForeignKey.CASCADE;
 
         public void setAssessment_due_date(Date assessment_due_date) {
             this.assessment_due_date = assessment_due_date;
+        }
+
+        public int getAssessment_score() {
+            return assessment_score;
+        }
+
+        public void setAssessment_score(int assessment_score) {
+            this.assessment_score = assessment_score;
         }
 
         @Override

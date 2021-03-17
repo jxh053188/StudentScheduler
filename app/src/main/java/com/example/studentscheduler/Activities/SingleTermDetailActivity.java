@@ -210,4 +210,5 @@ public class SingleTermDetailActivity extends AppCompatActivity {
         intent.putExtra("termId", termId);
         startActivity(intent);
     }
+
 }

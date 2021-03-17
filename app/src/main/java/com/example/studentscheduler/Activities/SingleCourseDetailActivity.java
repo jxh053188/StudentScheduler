@@ -261,4 +261,10 @@ public class SingleCourseDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onGenerateGradeReport(View view) {
+        Intent intent = new Intent(SingleCourseDetailActivity.this, GradeReport.class);
+        intent.putExtra("courseId", courseId);
+        intent.putExtra("termId", termId);
+        startActivity(intent);
+    }
 }

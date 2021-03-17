@@ -20,7 +20,7 @@ import com.example.studentscheduler.Entities.Note;
 import com.example.studentscheduler.Entities.Term;
 import com.example.studentscheduler.Entities.User;
 
-@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class, Note.class, User.class}, exportSchema = false, version = 5)
+@Database(entities = {Term.class, Course.class, Assessment.class, Instructor.class, Note.class, User.class}, exportSchema = false, version = 6)
 @TypeConverters({Converters.class})
 
 public abstract class AppDatabase extends RoomDatabase {

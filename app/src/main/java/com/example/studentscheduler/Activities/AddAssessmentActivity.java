@@ -38,6 +38,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
     private Spinner assessmentStatus;
     private String selectedType;
     private String selectedStatus;
+    private EditText assessmentScore;
     private boolean addSuccessful;
     private Assessment assessment;
     private int courseId;
@@ -55,6 +56,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
         termId = intent.getIntExtra("termId", -1);
         assessmentName = findViewById(R.id.assessmentNameInput);
         assessmentDate = findViewById(R.id.assessmentDateInput);
+        assessmentScore = findViewById(R.id.assessmentGrade);
 
         String[] typeSpinner = new String[]{
                 "Performance Assessment", "Objective Assessment"
@@ -157,6 +159,13 @@ public class AddAssessmentActivity extends AppCompatActivity {
             String aName = assessmentName.getText().toString();
             String date = assessmentDate.getText().toString();
             Date dueDate = format.parse(date);
+            int score;
+
+            if(assessmentScore.getText().toString().isEmpty()){
+                score = 0;
+            } else {
+                score = Integer.parseInt(assessmentScore.getText().toString());
+            }
 
             Assessment assessment = new Assessment();
             assessment.setAssessment_name(aName);
@@ -164,6 +173,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
             assessment.setAssessment_type(selectedType);
             assessment.setAssessment_due_date(dueDate);
             assessment.setCourse_id_fk(courseId);
+            assessment.setAssessment_score(score);
             db.assessmentDao().insertAssessment(assessment);
             Toast.makeText(this, "New Assessment is saved", Toast.LENGTH_SHORT).show();
             addSuccessful = true;

@@ -23,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.XMLFormatter;
 
 public class EditAssessmentActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
     private int courseId;
     private EditText assessmentName;
     private EditText assessmentDate;
+    private EditText assessmentScore;
     private Spinner assessmentType;
     private Spinner assessmentStatus;
     private String selectedType;
@@ -49,6 +51,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
         courseId = intent.getIntExtra("courseId", -1);
         assessmentName = findViewById(R.id.editAssessmentNameInput);
         assessmentDate = findViewById(R.id.editAssessmentDateInput);
+        assessmentScore = findViewById(R.id.editAssessmentGrade);
 
         String[] typeSpinner = new String[]{
                 "Performance Assessment", "Objective Assessment"
@@ -151,11 +154,13 @@ public class EditAssessmentActivity extends AppCompatActivity {
         String type = assessment.getAssessment_type();
         Date date = assessment.getAssessment_due_date();
         String dueDate = dateFormat.format(date);
+        String aScore = String.valueOf(assessment.getAssessment_score());
 
         assessmentName.setText(name);
         assessmentStatus.setSelection(getIndex(assessmentStatus,status));
         assessmentDate.setText(dueDate);
         assessmentType.setSelection(getIndex(assessmentType, type));
+        assessmentScore.setText(aScore);
     }
 
     public Assessment onUpdateAssessment() throws ParseException {
@@ -164,6 +169,13 @@ public class EditAssessmentActivity extends AppCompatActivity {
         String aName = assessmentName.getText().toString();
         String date = assessmentDate.getText().toString();
         Date dueDate = format.parse(date);
+        int score;
+
+        if(assessmentScore.getText().toString().isEmpty()){
+            score = 0;
+        } else {
+            score = Integer.parseInt(assessmentScore.getText().toString());
+        }
 
         if(aName.trim().isEmpty()){
             Toast.makeText(this,"Name cannot be empty", Toast.LENGTH_SHORT).show();
@@ -180,6 +192,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
         assessment.setAssessment_status(selectedStatus);
         assessment.setAssessment_type(selectedType);
         assessment.setAssessment_due_date(dueDate);
+        assessment.setAssessment_score(score);
         db.assessmentDao().updateAssessment(assessment);
         Toast.makeText(this,"Assessment Updated", Toast.LENGTH_SHORT).show();
         updateSuccessful = true;

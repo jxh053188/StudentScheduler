@@ -41,6 +41,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
     Button notificationButton;
     private final Calendar cal = Calendar.getInstance();
     private TextView dateMilli;
+    private TextView assessmentScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         assessmentType = findViewById(R.id.assessmentDetailType);
         assessmentStatus = findViewById(R.id.assessmentDetailStatus);
         assessmentDueDate = findViewById(R.id.assessmentDetailDueDate);
+        assessmentScore = findViewById(R.id.assessmentDetailScore);
         courseId = intent.getIntExtra("courseId" ,-1);
         notificationButton = findViewById(R.id.onAssessmentNotificiation);
         //dateMilli = findViewById(R.id.assessmentAlertDate);
@@ -100,12 +102,14 @@ public class SingleAssessmentDetailActivity extends AppCompatActivity {
         String status = assessment.getAssessment_status();
         String type = assessment.getAssessment_type();
         Date date = assessment.getAssessment_due_date();
+        String score = String.valueOf(assessment.getAssessment_score());
         String dueDate = sdf.format(date);
 
         assessmentName.setText(name);
         assessmentStatus.setText(status);
         assessmentDueDate.setText(dueDate);
         assessmentType.setText(type);
+        assessmentScore.setText(score + "%");
 
     }
 

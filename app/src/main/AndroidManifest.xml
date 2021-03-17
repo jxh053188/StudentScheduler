@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentScheduler">
+        <activity android:name=".Activities.GradeReport"></activity>
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -98,8 +100,9 @@
             android:name=".Activities.AllTermsActivity"
             android:label="Terms List"
             android:parentActivityName=".Activities.MainActivity" />
-        <activity android:name=".Activities.MainActivity"
-            android:label="Student Dashboard"></activity>
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="Student Dashboard" />
     </application>
 
 </manifest>
