@@ -58,7 +58,28 @@ public class GradeReport extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         courseGradePer = String.valueOf(db.assessmentDao().assessmentAvg(courseId));
-        courseGrade.setText(courseGradePer);
+        int gradeInt = db.assessmentDao().assessmentAvg(courseId);
+        String letterGrade;
+
+        if(gradeInt >= 90){
+            letterGrade = "A";
+        }
+        else if(gradeInt < 90 && gradeInt >= 80){
+            letterGrade = "B";
+        }
+        else if(gradeInt < 80 && gradeInt >= 70){
+            letterGrade = "C";
+        }
+        else if(gradeInt < 70 && gradeInt >= 60){
+            letterGrade = "D";
+        }
+        else{
+            letterGrade = "F";
+        }
+
+
+
+        courseGrade.setText(courseGradePer + "%   " + letterGrade);
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy 'at' h:mm a");

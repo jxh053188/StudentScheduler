@@ -59,7 +59,7 @@ public class GradeReportAdapter extends ArrayAdapter<Assessment> {
         TextView tvLet = (TextView) convertView.findViewById(R.id.gradeReportGradeLetter);
 
         tvName.setText(name);
-        tvPer.setText(scorePer);
+        tvPer.setText(scorePer + "%");
         tvLet.setText(scoreLet);
 
         return convertView;
