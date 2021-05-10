@@ -83,7 +83,8 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true"
-            tools:ignore="ObsoleteLayoutParam">
+            tools:ignore="ObsoleteLayoutParam"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
